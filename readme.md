@@ -65,12 +65,12 @@ You can also use PSQL to connect to the database by running the following comman
 
 Inside the container:
 ```
-psql -U {username} {database}
+psql -U <username> <database>
 ```
 
 outside the container:
 ```
-psql -U {username} -h <localhost/ipaddress of machine> {database}
+psql -U <username> -h <localhost/ipaddress of machine> <database>
 ```
 
 If you're running this inside the container you won't be prompted for the password as it uses a trust policy, but if asked, use the default
@@ -116,7 +116,7 @@ ORACLE_DSN	dbi:Oracle:host=<ip address of oracle db>;sid=xe;port=1521
 ORACLE_USER	e.g system
 ORACLE_PWD      e.g oracle
 
-PG_DSN		dbi:Pg:dbname={database};host=<ip address of postgres db>;port=5432
+PG_DSN		dbi:Pg:dbname=<database>;host=<ip address of postgres db>;port=5432
 PG_USER	        e.g system
 PG_PWD	        e.g postgres
 
@@ -153,7 +153,7 @@ ora2pg -t COPY -c ../config/ora2pg.conf
 After doing this you'll end up with a folder full of sql scripts copy this folder onto the machine running (or if you're running docker then volume bind the folder to your container) and use psql to execute the output.sql file inside of the data folder:
 
 ```
-psql -U system -d <databse> -a -f <path to data>/output.sql
+psql -U <username> -d <database> -a -f <path to data>/output.sql
 ```
 
 If prompted for a password, enter the password for the user and hit enter and it should start importing the data
