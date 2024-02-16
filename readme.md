@@ -30,10 +30,10 @@ Then to spin up a container run the following command:
 docker run --name juror_postgres -d -p 5432:5432 --env PGDATA=/data/ gitlab-registry.clouddev.online/juror-digital/moj-juror/oracle-to-postgressql-migration/juror_mod_postgres
 ```
 NOTE: If the command fails due to the container already existing then you'll need to change the name of the container or remove the container and recreate it.
-WARNING: Make sure the baseline the image after creating and also re-creating the juror-mod database.
+WARNING: Make sure to baseline the image after creating and also re-creating the juror-mod database.
 
 
-If you need to bind a folder to create/restore database images then run the following command instead:
+If you need to bind a folder to create/restore database images then follow the steps below:
 
 you'll need to create the directory first if it doesn't exist you can use finder to create the folder or the mkdir command:
 ```
