@@ -56,8 +56,8 @@ Set the following values for the rest of the properties:
 * Host - localhost
 * database - juror
 * port - 5432
-* username - system
-* password - postgres
+* username - e.g system
+* password - e.g postgres
 
 press ok and try to connect the database, and if successful you should be able to browse the database using DBeaver.
 
@@ -65,12 +65,12 @@ You can also use PSQL to connect to the database by running the following comman
 
 Inside the container:
 ```
-psql -U system juror
+psql -U {username} {database}
 ```
 
 outside the container:
 ```
-psql -U system -h <localhost/ipaddress of machine> juror
+psql -U {username} -h <localhost/ipaddress of machine> {database}
 ```
 
 If you're running this inside the container you won't be prompted for the password as it uses a trust policy, but if asked enter `postgres`
@@ -113,12 +113,12 @@ You will want to edit the config file located in the config folder and edit the 
 
 ```
 ORACLE_DSN	dbi:Oracle:host=<ip address of oracle db>;sid=xe;port=1521
-ORACLE_USER	system
-ORACLE_PWD oracle
+ORACLE_USER	e.g system
+ORACLE_PWD      e.g oracle
 
-PG_DSN		dbi:Pg:dbname=juror;host=<ip address of postgres db>;port=5432
-PG_USER	    system
-PG_PWD	    postgres
+PG_DSN		dbi:Pg:dbname={database};host=<ip address of postgres db>;port=5432
+PG_USER	        e.g system
+PG_PWD	        e.g postgres
 
 You need to set the PGPASSWORD environment variable in order for the import script to stop you prompting for the password every step, in order to do this run the following:
 ```
@@ -220,8 +220,8 @@ e.g. ora2pg --project_base /app/migration --init_project JUROR
 ```
 ORACLE_HOME	/opt/instant_client_12_2 - this is where the instant client lives
 ORACLE_DSN	dbi:Oracle:host=172.17.0.5;sid=xe;port=1521 - This is the connection string
-ORACLE_USER	system
-ORACLE_PWD oracle
+ORACLE_USER	e.g system
+ORACLE_PWD      e.g oracle
 USER_GRANTS	0 - This has been set to zero to grab the existing users from the oracle DB
 DEBUG		1 - Can set this optionally to zero but was useful to see what the tool was doing
 ```
