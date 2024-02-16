@@ -73,7 +73,7 @@ outside the container:
 psql -U {username} -h <localhost/ipaddress of machine> {database}
 ```
 
-If you're running this inside the container you won't be prompted for the password as it uses a trust policy, but if asked enter `postgres`
+If you're running this inside the container you won't be prompted for the password as it uses a trust policy, but if asked, use the default
 and hit enter and you should be connected to the database.
 # How to run the migration tool
 
