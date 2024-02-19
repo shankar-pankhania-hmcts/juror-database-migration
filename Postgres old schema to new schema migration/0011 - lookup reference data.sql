@@ -4,7 +4,7 @@
  * +---------------+---------------+--------------------+---------------+-------------------------+
  * | 0011a         | juror         | t_phone            | juror_mod     | t_contact               |
  * | 0011b         | juror         | contact_preference | juror_mod     | t_contact_preference    |
- * | 0011c         | juror         | t_special          | juror_mod     | t_reasonable_adjustments |
+ * | 0011c         | juror         | t_special          | juror_mod     | t_reasonable_adjustments|
  * | 0011d         | juror         | dis_code           | juror_mod     | t_disq_code             |
  * | 0011e         | juror         | exc_code           | juror_mod     | t_exc_code              |
  * | 0011f         | juror         | form_attr          | juror_mod     | t_form_attr             |
