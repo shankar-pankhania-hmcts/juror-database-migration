@@ -1,9 +1,8 @@
 # Note - need to set up environment variables for database username and password if running locally
-export ORACLE_USERNAME=....
-export ORACLE_PASSWORD=....
-export POSTGRES_USERNAME=....
-export POSTGRES_PASSWORD=....
-
+ORACLE_USERNAME
+ORACLE_PASSWORD
+POSTGRES_USERNAME
+POSTGRES_PASSWORD
 
 # How to setup the Postgresql database (Dev Environment)
 
