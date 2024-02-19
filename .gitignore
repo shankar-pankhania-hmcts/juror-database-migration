@@ -1,0 +1,6 @@
+migration/JUROR/data/*
+migration/JUROR/dump/*
+migration/JUROR_DIGITAL/data/*
+migration/JUROR_DIGITAL_USER/data/*
+migration/HK/data/*
+.DS_Store
