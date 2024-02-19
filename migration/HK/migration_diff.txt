@@ -1,0 +1,158 @@
+[2023-09-08 14:52:41] Ora2Pg version: 24.0
+[2023-09-08 14:52:41] Export type: TEST
+[2023-09-08 14:52:41] Geometry export type: INTERNAL
+[2023-09-08 14:52:41] ORACLE_HOME = /opt/instant_client_12_2
+[2023-09-08 14:52:41] NLS_LANG = AMERICAN_AMERICA.AL32UTF8
+[2023-09-08 14:52:41] NLS_NCHAR = AL32UTF8
+[2023-09-08 14:52:41] Trying to connect to database: dbi:Oracle:host=172.17.0.3;sid=xe;port=1521
+[2023-09-08 14:52:41] Isolation level: SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+[2023-09-08 14:52:41] Force Oracle to compile schema HK before code extraction
+[2023-09-08 14:52:44] Looking for objects count related to source database and PostgreSQL tables...
+[2023-09-08 14:52:44] Collecting 2 tables in DBA_OBJECTS took:  0 wallclock secs ( 0.01 usr +  0.00 sys =  0.01 CPU)
+[2023-09-08 14:52:45] Collecting 2 tables information in DBA_TABLES took:  1 wallclock secs ( 0.01 usr +  0.00 sys =  0.01 CPU)
+[TEST COLUMNS COUNT]
+ORACLEDB:HK_OWNER_RESTRICT:4
+POSTGRES:hk.hk_owner_restrict:4
+ORACLEDB:HK_PARAMS:4
+POSTGRES:hk.hk_params:4
+[ERRORS COLUMNS COUNT]
+OK, Oracle and PostgreSQL have the same number of columns.
+[TEST INDEXES COUNT]
+[2023-09-08 14:53:15] Collecting 1 indexes in DBA_INDEXES took: 28 wallclock secs ( 0.03 usr +  0.00 sys =  0.03 CPU)
+ORACLEDB:HK_OWNER_RESTRICT:0
+POSTGRES:hk.hk_owner_restrict:0
+ORACLEDB:HK_PARAMS:1
+POSTGRES:hk.hk_params:1
+[ERRORS INDEXES COUNT]
+OK, Oracle and PostgreSQL have the same number of indexes.
+
+[TEST UNIQUE CONSTRAINTS COUNT]
+ORACLEDB:HK_OWNER_RESTRICT:0
+POSTGRES:hk.hk_owner_restrict:0
+ORACLEDB:HK_PARAMS:0
+POSTGRES:hk.hk_params:0
+[ERRORS UNIQUE CONSTRAINTS COUNT]
+OK, Oracle and PostgreSQL have the same number of unique constraints.
+
+[TEST PRIMARY KEYS COUNT]
+ORACLEDB:HK_OWNER_RESTRICT:0
+POSTGRES:hk.hk_owner_restrict:0
+ORACLEDB:HK_PARAMS:1
+POSTGRES:hk.hk_params:1
+[ERRORS PRIMARY KEYS COUNT]
+OK, Oracle and PostgreSQL have the same number of primary keys.
+
+[TEST CHECK CONSTRAINTS COUNT]
+ORACLEDB:HK_OWNER_RESTRICT:0
+POSTGRES:hk.hk_owner_restrict:0
+ORACLEDB:HK_PARAMS:0
+POSTGRES:hk.hk_params:0
+[ERRORS CHECK CONSTRAINTS COUNT]
+OK, Oracle and PostgreSQL have the same number of check constraints.
+
+[TEST NOT NULL CONSTRAINTS COUNT]
+ORACLEDB:HK_OWNER_RESTRICT:8
+POSTGRES:hk.hk_owner_restrict:4
+ORACLEDB:HK_PARAMS:3
+POSTGRES:hk.hk_params:2
+[ERRORS NOT NULL CONSTRAINTS COUNT]
+DIFF: Table hk.hk_owner_restrict doesn't have the same number of not null constraints in source database (8) and in PostgreSQL (4).
+DIFF: Table hk.hk_params doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+
+[TEST COLUMN DEFAULT VALUE COUNT]
+ORACLEDB:HK_OWNER_RESTRICT:0
+POSTGRES:hk.hk_owner_restrict:0
+ORACLEDB:HK_PARAMS:0
+POSTGRES:hk.hk_params:0
+[ERRORS COLUMN DEFAULT VALUE COUNT]
+OK, Oracle and PostgreSQL have the same number of column default value.
+
+[TEST FOREIGN KEYS COUNT]
+ORACLEDB:HK_OWNER_RESTRICT:0
+POSTGRES:hk.hk_owner_restrict:0
+ORACLEDB:HK_PARAMS:0
+POSTGRES:hk.hk_params:0
+[ERRORS FOREIGN KEYS COUNT]
+OK, Oracle and PostgreSQL have the same number of foreign keys.
+
+[TEST PARTITION COUNT]
+[ERRORS PARTITION COUNT]
+OK, Oracle and PostgreSQL have the same number of PARTITION.
+
+[TEST TABLE COUNT]
+ORACLEDB:TABLE:2
+POSTGRES:TABLE:2
+[ERRORS TABLE COUNT]
+OK, Oracle and PostgreSQL have the same number of TABLE.
+
+[TEST TABLE TRIGGERS COUNT]
+ORACLEDB:HK_OWNER_RESTRICT:0
+POSTGRES:hk.hk_owner_restrict:0
+ORACLEDB:HK_PARAMS:0
+POSTGRES:hk.hk_params:0
+[ERRORS TABLE TRIGGERS COUNT]
+OK, Oracle and PostgreSQL have the same number of table triggers.
+
+[TEST TRIGGER COUNT]
+ORACLEDB:TRIGGER:0
+POSTGRES:TRIGGER:0
+[ERRORS TRIGGER COUNT]
+OK, Oracle and PostgreSQL have the same number of TRIGGER.
+[2023-09-08 14:54:41] Looking for source database and PostgreSQL objects count...
+[2023-09-08 14:54:42] Collecting 0 tables in DBA_OBJECTS took:  1 wallclock secs ( 0.01 usr +  0.00 sys =  0.01 CPU)
+
+[TEST VIEW COUNT]
+ORACLEDB:VIEW:0
+POSTGRES:VIEW:6
+[ERRORS VIEW COUNT]
+DIFF: VIEW does not have the same count in source database (0) and in PostgreSQL (6).
+[2023-09-08 14:54:43] Looking for source database and PostgreSQL objects count...
+
+[TEST MVIEW COUNT]
+ORACLEDB:MVIEW:0
+POSTGRES:MVIEW:0
+[ERRORS MVIEW COUNT]
+OK, Oracle and PostgreSQL have the same number of MVIEW.
+[2023-09-08 14:54:43] Looking for source database and PostgreSQL objects count...
+
+[TEST SEQUENCE COUNT]
+ORACLEDB:SEQUENCE:0
+POSTGRES:SEQUENCE:0
+[ERRORS SEQUENCE COUNT]
+OK, Oracle and PostgreSQL have the same number of SEQUENCE.
+[2023-09-08 14:54:43] Looking for source database and PostgreSQL objects count...
+[2023-09-08 14:54:43] ORACLE_HOME = /opt/instant_client_12_2
+[2023-09-08 14:54:43] NLS_LANG = AMERICAN_AMERICA.AL32UTF8
+[2023-09-08 14:54:43] NLS_NCHAR = AL32UTF8
+[2023-09-08 14:54:43] Trying to connect to database: dbi:Oracle:host=172.17.0.3;sid=xe;port=1521
+[2023-09-08 14:54:43] Isolation level: SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+
+[TEST TYPE COUNT]
+ORACLEDB:TYPE:0
+POSTGRES:TYPE:0
+[ERRORS TYPE COUNT]
+OK, Oracle and PostgreSQL have the same number of TYPE.
+[2023-09-08 14:54:43] Looking for source database and PostgreSQL objects count...
+
+[TEST FDW COUNT]
+ORACLEDB:FDW:0
+POSTGRES:FDW:0
+[ERRORS FDW COUNT]
+OK, Oracle and PostgreSQL have the same number of FDW.
+[2023-09-08 14:54:44] Looking for functions count related to source database and PostgreSQL functions...
+
+[TEST FUNCTION COUNT]
+ORACLEDB:FUNCTION:3
+POSTGRES:FUNCTION:83
+[ERRORS FUNCTION COUNT]
+DIFF: FUNCTION does not have the same count in source database (3) and in PostgreSQL (83).
+DIFF: Function housekeeping_nocommit.initiate_run is missing in PostgreSQL database.
+DIFF: Function housekeeping.initiate_run is missing in PostgreSQL database.
+DIFF: Function juror_digital_housekeeping.perform_deletions is missing in PostgreSQL database.
+
+[2023-09-08 14:54:45] Looking for last values related to source database and PostgreSQL sequences...
+
+[TEST SEQUENCE VALUES]
+[ERRORS SEQUENCE VALUES COUNT]
+OK, Oracle and PostgreSQL have the same number of sequence values.
+

@@ -1,0 +1,29 @@
+[2023-09-06 15:39:59] Ora2Pg version: 24.0
+[2023-09-06 15:39:59] Export type: SHOW_TABLE
+[2023-09-06 15:39:59] Geometry export type: INTERNAL
+[2023-09-06 15:39:59] ORACLE_HOME = /opt/instant_client_12_2
+[2023-09-06 15:39:59] NLS_LANG = AMERICAN_AMERICA.AL32UTF8
+[2023-09-06 15:39:59] NLS_NCHAR = AL32UTF8
+[2023-09-06 15:39:59] Trying to connect to database: dbi:Oracle:host=172.17.0.2;sid=xe;port=1521
+[2023-09-06 15:39:59] Isolation level: SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+[2023-09-06 15:39:59] Showing table information...
+[2023-09-06 15:39:59] Collecting 2 tables in DBA_OBJECTS took:  0 wallclock secs ( 0.00 usr +  0.01 sys =  0.01 CPU)
+[2023-09-06 15:39:59] Collecting 2 tables information in DBA_TABLES took:  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+[2023-09-06 15:39:59] Retrieving column identity information...
+[2023-09-06 15:39:59] Looking to subpartition information...
+[2023-09-06 15:40:00] Looking to partitioned tables information...
+[2023-09-06 15:40:00] Looking to external tables information...
+[2023-09-06 15:40:00] [1] TABLE HK.HK_OWNER_RESTRICT (owner: HK, 1 rows)
+[2023-09-06 15:40:00] [2] TABLE HK.HK_PARAMS (owner: HK, 1 rows)
+[2023-09-06 15:40:00] ----------------------------------------------------------
+[2023-09-06 15:40:00] Total number of rows: 2
+
+[2023-09-06 15:40:00] Global Temporary Tables:
+[2023-09-06 15:40:00] 
+
+[2023-09-06 15:40:00] Top 10 of tables sorted by number of rows:
+[2023-09-06 15:40:00] 	[1] TABLE HK.HK_PARAMS has 1 rows
+[2023-09-06 15:40:00] 	[2] TABLE HK.HK_OWNER_RESTRICT has 1 rows
+[2023-09-06 15:40:00] Top 10 of largest tables:
+[2023-09-06 15:40:00] 	[1] TABLE HK.HK_PARAMS: 0 MB (1 rows)
+[2023-09-06 15:40:00] 	[2] TABLE HK.HK_OWNER_RESTRICT: 0 MB (1 rows)

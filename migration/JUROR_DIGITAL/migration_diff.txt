@@ -1,0 +1,839 @@
+[2023-09-07 14:31:10] Ora2Pg version: 24.0
+[2023-09-07 14:31:10] Export type: TEST
+[2023-09-07 14:31:10] Geometry export type: INTERNAL
+[2023-09-07 14:31:10] ORACLE_HOME = /opt/instant_client_12_2
+[2023-09-07 14:31:10] NLS_LANG = AMERICAN_AMERICA.AL32UTF8
+[2023-09-07 14:31:10] NLS_NCHAR = AL32UTF8
+[2023-09-07 14:31:10] Trying to connect to database: dbi:Oracle:host=172.17.0.4;sid=xe;port=1521
+[2023-09-07 14:31:11] Isolation level: SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+[2023-09-07 14:31:11] Force Oracle to compile schema JUROR_DIGITAL before code extraction
+[2023-09-07 14:31:12] Looking for objects count related to source database and PostgreSQL tables...
+[2023-09-07 14:31:13] Collecting 42 tables in ALL_OBJECTS took:  1 wallclock secs ( 0.01 usr +  0.00 sys =  0.01 CPU)
+[2023-09-07 14:31:25] Collecting 38 tables information in ALL_TABLES took: 12 wallclock secs ( 0.01 usr +  0.00 sys =  0.01 CPU)
+[TEST COLUMNS COUNT]
+ORACLEDB:APP_SETTINGS:2
+POSTGRES:juror_digital.app_settings:2
+ORACLEDB:BUREAU_AUTH:2
+POSTGRES:juror_digital.bureau_auth:2
+ORACLEDB:CHANGE_LOG:7
+POSTGRES:juror_digital.change_log:7
+ORACLEDB:CHANGE_LOG_ITEM:7
+POSTGRES:juror_digital.change_log_item:7
+ORACLEDB:CONTACT_LOG_EXT:3
+POSTGRES:juror_digital.contact_log_ext:3
+ORACLEDB:CORONER_POOL_EXT:3
+POSTGRES:juror_digital.coroner_pool_ext:3
+ORACLEDB:COURT_REGION:3
+POSTGRES:juror_digital.court_region:3
+ORACLEDB:COURT_WHITELIST:1
+POSTGRES:juror_digital.court_whitelist:1
+ORACLEDB:EXPENSES_RATES:2
+POSTGRES:juror_digital.expenses_rates:2
+ORACLEDB:JD_HOUSEKEEPING_AUDIT:4
+POSTGRES:juror_digital.jd_housekeeping_audit:4
+ORACLEDB:JUROR_RESPONSE:47
+POSTGRES:juror_digital.juror_response:47
+ORACLEDB:JUROR_RESPONSE_AUD:5
+POSTGRES:juror_digital.juror_response_aud:5
+ORACLEDB:JUROR_RESPONSE_CJS_EMPLOYMENT:4
+POSTGRES:juror_digital.juror_response_cjs_employment:4
+ORACLEDB:JUROR_RESPONSE_SPECIAL_NEEDS:4
+POSTGRES:juror_digital.juror_response_special_needs:4
+ORACLEDB:NOTIFY_TEMPLATE_FIELD:11
+POSTGRES:juror_digital.notify_template_field:11
+ORACLEDB:NOTIFY_TEMPLATE_MAPPING:6
+POSTGRES:juror_digital.notify_template_mapping:6
+ORACLEDB:PAPER_RESPONSE:33
+POSTGRES:juror_digital.paper_response:33
+ORACLEDB:PAPER_RESPONSE_CJS_EMPLOYMENT:4
+POSTGRES:juror_digital.paper_response_cjs_employment:4
+ORACLEDB:PAPER_RESPONSE_SPECIAL_NEEDS:4
+POSTGRES:juror_digital.paper_response_special_needs:4
+ORACLEDB:POOL_EXTEND:2
+POSTGRES:juror_digital.pool_extend:2
+ORACLEDB:POOL_MEMBER_EXT:4
+POSTGRES:juror_digital.pool_member_ext:4
+ORACLEDB:POOL_REQUEST_EXT:3
+POSTGRES:juror_digital.pool_request_ext:3
+ORACLEDB:REGION_NOTIFY_TEMPLATE:8
+POSTGRES:juror_digital.region_notify_template:8
+ORACLEDB:STAFF:16
+POSTGRES:juror_digital.staff:16
+ORACLEDB:STAFF_AUDIT:19
+POSTGRES:juror_digital.staff_audit:19
+ORACLEDB:STAFF_JUROR_RESPONSE_AUDIT:7
+POSTGRES:juror_digital.staff_juror_response_audit:7
+ORACLEDB:STATS_AUTO_PROCESSED:2
+POSTGRES:juror_digital.stats_auto_processed:2
+ORACLEDB:STATS_DEFERRALS:6
+POSTGRES:juror_digital.stats_deferrals:6
+ORACLEDB:STATS_EXCUSALS:6
+POSTGRES:juror_digital.stats_excusals:6
+ORACLEDB:STATS_NOT_RESPONDED:3
+POSTGRES:juror_digital.stats_not_responded:3
+ORACLEDB:STATS_RESPONSE_TIMES:6
+POSTGRES:juror_digital.stats_response_times:6
+ORACLEDB:STATS_THIRDPARTY_ONLINE:2
+POSTGRES:juror_digital.stats_thirdparty_online:2
+ORACLEDB:STATS_UNPROCESSED_RESPONSES:2
+POSTGRES:juror_digital.stats_unprocessed_responses:2
+ORACLEDB:STATS_WELSH_ONLINE_RESPONSES:2
+POSTGRES:juror_digital.stats_welsh_online_responses:2
+ORACLEDB:SURVEY_RESPONSE:6
+POSTGRES:juror_digital.survey_response:6
+ORACLEDB:TEAM:3
+POSTGRES:juror_digital.team:3
+ORACLEDB:VOTERS:23
+POSTGRES:juror_digital.voters:23
+ORACLEDB:schema_version:10
+POSTGRES:juror_digital.schema_version:10
+[ERRORS COLUMNS COUNT]
+OK, Oracle and PostgreSQL have the same number of columns.
+[TEST INDEXES COUNT]
+[2023-09-07 14:32:36] Collecting 61 indexes in ALL_INDEXES took: 69 wallclock secs ( 0.02 usr +  0.00 sys =  0.02 CPU)
+ORACLEDB:APP_SETTINGS:1
+POSTGRES:juror_digital.app_settings:1
+ORACLEDB:BUREAU_AUTH:0
+POSTGRES:juror_digital.bureau_auth:0
+ORACLEDB:CHANGE_LOG:1
+POSTGRES:juror_digital.change_log:1
+ORACLEDB:CHANGE_LOG_ITEM:1
+POSTGRES:juror_digital.change_log_item:1
+ORACLEDB:CONTACT_LOG_EXT:1
+POSTGRES:juror_digital.contact_log_ext:1
+ORACLEDB:CORONER_POOL_EXT:1
+POSTGRES:juror_digital.coroner_pool_ext:1
+ORACLEDB:COURT_REGION:2
+POSTGRES:juror_digital.court_region:2
+ORACLEDB:COURT_WHITELIST:1
+POSTGRES:juror_digital.court_whitelist:1
+ORACLEDB:EXPENSES_RATES:1
+POSTGRES:juror_digital.expenses_rates:1
+ORACLEDB:JD_HOUSEKEEPING_AUDIT:0
+POSTGRES:juror_digital.jd_housekeeping_audit:0
+ORACLEDB:JUROR_RESPONSE:1
+POSTGRES:juror_digital.juror_response:1
+ORACLEDB:JUROR_RESPONSE_AUD:0
+POSTGRES:juror_digital.juror_response_aud:0
+ORACLEDB:JUROR_RESPONSE_CJS_EMPLOYMENT:1
+POSTGRES:juror_digital.juror_response_cjs_employment:1
+ORACLEDB:JUROR_RESPONSE_SPECIAL_NEEDS:1
+POSTGRES:juror_digital.juror_response_special_needs:1
+ORACLEDB:NOTIFY_TEMPLATE_FIELD:1
+POSTGRES:juror_digital.notify_template_field:1
+ORACLEDB:NOTIFY_TEMPLATE_MAPPING:2
+POSTGRES:juror_digital.notify_template_mapping:2
+ORACLEDB:PAPER_RESPONSE:1
+POSTGRES:juror_digital.paper_response:1
+ORACLEDB:PAPER_RESPONSE_CJS_EMPLOYMENT:1
+POSTGRES:juror_digital.paper_response_cjs_employment:1
+ORACLEDB:PAPER_RESPONSE_SPECIAL_NEEDS:1
+POSTGRES:juror_digital.paper_response_special_needs:1
+ORACLEDB:POOL_EXTEND:1
+POSTGRES:juror_digital.pool_extend:1
+ORACLEDB:POOL_MEMBER_EXT:1
+POSTGRES:juror_digital.pool_member_ext:1
+ORACLEDB:POOL_REQUEST_EXT:1
+POSTGRES:juror_digital.pool_request_ext:1
+ORACLEDB:REGION_NOTIFY_TEMPLATE:1
+POSTGRES:juror_digital.region_notify_template:1
+ORACLEDB:STAFF:1
+POSTGRES:juror_digital.staff:1
+ORACLEDB:STAFF_AUDIT:1
+POSTGRES:juror_digital.staff_audit:1
+ORACLEDB:STAFF_JUROR_RESPONSE_AUDIT:1
+POSTGRES:juror_digital.staff_juror_response_audit:1
+ORACLEDB:STATS_AUTO_PROCESSED:1
+POSTGRES:juror_digital.stats_auto_processed:1
+ORACLEDB:STATS_DEFERRALS:1
+POSTGRES:juror_digital.stats_deferrals:1
+ORACLEDB:STATS_EXCUSALS:1
+POSTGRES:juror_digital.stats_excusals:1
+ORACLEDB:STATS_NOT_RESPONDED:1
+POSTGRES:juror_digital.stats_not_responded:1
+ORACLEDB:STATS_RESPONSE_TIMES:1
+POSTGRES:juror_digital.stats_response_times:1
+ORACLEDB:STATS_THIRDPARTY_ONLINE:1
+POSTGRES:juror_digital.stats_thirdparty_online:1
+ORACLEDB:STATS_UNPROCESSED_RESPONSES:1
+POSTGRES:juror_digital.stats_unprocessed_responses:1
+ORACLEDB:STATS_WELSH_ONLINE_RESPONSES:1
+POSTGRES:juror_digital.stats_welsh_online_responses:1
+ORACLEDB:SURVEY_RESPONSE:1
+POSTGRES:juror_digital.survey_response:1
+ORACLEDB:TEAM:2
+POSTGRES:juror_digital.team:2
+ORACLEDB:VOTERS:1
+POSTGRES:juror_digital.voters:1
+ORACLEDB:schema_version:1
+POSTGRES:juror_digital.schema_version:1
+[ERRORS INDEXES COUNT]
+OK, Oracle and PostgreSQL have the same number of indexes.
+
+[TEST UNIQUE CONSTRAINTS COUNT]
+ORACLEDB:APP_SETTINGS:0
+POSTGRES:juror_digital.app_settings:0
+ORACLEDB:BUREAU_AUTH:0
+POSTGRES:juror_digital.bureau_auth:0
+ORACLEDB:CHANGE_LOG:0
+POSTGRES:juror_digital.change_log:0
+ORACLEDB:CHANGE_LOG_ITEM:0
+POSTGRES:juror_digital.change_log_item:0
+ORACLEDB:CONTACT_LOG_EXT:0
+POSTGRES:juror_digital.contact_log_ext:0
+ORACLEDB:CORONER_POOL_EXT:0
+POSTGRES:juror_digital.coroner_pool_ext:0
+ORACLEDB:COURT_REGION:1
+POSTGRES:juror_digital.court_region:1
+ORACLEDB:COURT_WHITELIST:1
+POSTGRES:juror_digital.court_whitelist:1
+ORACLEDB:EXPENSES_RATES:0
+POSTGRES:juror_digital.expenses_rates:0
+ORACLEDB:JD_HOUSEKEEPING_AUDIT:0
+POSTGRES:juror_digital.jd_housekeeping_audit:0
+ORACLEDB:JUROR_RESPONSE:0
+POSTGRES:juror_digital.juror_response:0
+ORACLEDB:JUROR_RESPONSE_AUD:0
+POSTGRES:juror_digital.juror_response_aud:0
+ORACLEDB:JUROR_RESPONSE_CJS_EMPLOYMENT:0
+POSTGRES:juror_digital.juror_response_cjs_employment:0
+ORACLEDB:JUROR_RESPONSE_SPECIAL_NEEDS:0
+POSTGRES:juror_digital.juror_response_special_needs:0
+ORACLEDB:NOTIFY_TEMPLATE_FIELD:0
+POSTGRES:juror_digital.notify_template_field:0
+ORACLEDB:NOTIFY_TEMPLATE_MAPPING:1
+POSTGRES:juror_digital.notify_template_mapping:1
+ORACLEDB:PAPER_RESPONSE:0
+POSTGRES:juror_digital.paper_response:0
+ORACLEDB:PAPER_RESPONSE_CJS_EMPLOYMENT:0
+POSTGRES:juror_digital.paper_response_cjs_employment:0
+ORACLEDB:PAPER_RESPONSE_SPECIAL_NEEDS:0
+POSTGRES:juror_digital.paper_response_special_needs:0
+ORACLEDB:POOL_EXTEND:0
+POSTGRES:juror_digital.pool_extend:0
+ORACLEDB:POOL_MEMBER_EXT:0
+POSTGRES:juror_digital.pool_member_ext:0
+ORACLEDB:POOL_REQUEST_EXT:0
+POSTGRES:juror_digital.pool_request_ext:0
+ORACLEDB:REGION_NOTIFY_TEMPLATE:0
+POSTGRES:juror_digital.region_notify_template:0
+ORACLEDB:STAFF:0
+POSTGRES:juror_digital.staff:0
+ORACLEDB:STAFF_AUDIT:0
+POSTGRES:juror_digital.staff_audit:0
+ORACLEDB:STAFF_JUROR_RESPONSE_AUDIT:0
+POSTGRES:juror_digital.staff_juror_response_audit:0
+ORACLEDB:STATS_AUTO_PROCESSED:0
+POSTGRES:juror_digital.stats_auto_processed:0
+ORACLEDB:STATS_DEFERRALS:0
+POSTGRES:juror_digital.stats_deferrals:0
+ORACLEDB:STATS_EXCUSALS:0
+POSTGRES:juror_digital.stats_excusals:0
+ORACLEDB:STATS_NOT_RESPONDED:0
+POSTGRES:juror_digital.stats_not_responded:0
+ORACLEDB:STATS_RESPONSE_TIMES:0
+POSTGRES:juror_digital.stats_response_times:0
+ORACLEDB:STATS_THIRDPARTY_ONLINE:0
+POSTGRES:juror_digital.stats_thirdparty_online:0
+ORACLEDB:STATS_UNPROCESSED_RESPONSES:0
+POSTGRES:juror_digital.stats_unprocessed_responses:0
+ORACLEDB:STATS_WELSH_ONLINE_RESPONSES:0
+POSTGRES:juror_digital.stats_welsh_online_responses:0
+ORACLEDB:SURVEY_RESPONSE:0
+POSTGRES:juror_digital.survey_response:0
+ORACLEDB:TEAM:1
+POSTGRES:juror_digital.team:1
+ORACLEDB:VOTERS:0
+POSTGRES:juror_digital.voters:0
+ORACLEDB:schema_version:0
+POSTGRES:juror_digital.schema_version:0
+[ERRORS UNIQUE CONSTRAINTS COUNT]
+OK, Oracle and PostgreSQL have the same number of unique constraints.
+
+[TEST PRIMARY KEYS COUNT]
+ORACLEDB:APP_SETTINGS:1
+POSTGRES:juror_digital.app_settings:1
+ORACLEDB:BUREAU_AUTH:0
+POSTGRES:juror_digital.bureau_auth:0
+ORACLEDB:CHANGE_LOG:1
+POSTGRES:juror_digital.change_log:1
+ORACLEDB:CHANGE_LOG_ITEM:1
+POSTGRES:juror_digital.change_log_item:1
+ORACLEDB:CONTACT_LOG_EXT:1
+POSTGRES:juror_digital.contact_log_ext:1
+ORACLEDB:CORONER_POOL_EXT:1
+POSTGRES:juror_digital.coroner_pool_ext:1
+ORACLEDB:COURT_REGION:1
+POSTGRES:juror_digital.court_region:1
+ORACLEDB:COURT_WHITELIST:0
+POSTGRES:juror_digital.court_whitelist:0
+ORACLEDB:EXPENSES_RATES:1
+POSTGRES:juror_digital.expenses_rates:1
+ORACLEDB:JD_HOUSEKEEPING_AUDIT:0
+POSTGRES:juror_digital.jd_housekeeping_audit:0
+ORACLEDB:JUROR_RESPONSE:1
+POSTGRES:juror_digital.juror_response:1
+ORACLEDB:JUROR_RESPONSE_AUD:0
+POSTGRES:juror_digital.juror_response_aud:0
+ORACLEDB:JUROR_RESPONSE_CJS_EMPLOYMENT:1
+POSTGRES:juror_digital.juror_response_cjs_employment:1
+ORACLEDB:JUROR_RESPONSE_SPECIAL_NEEDS:1
+POSTGRES:juror_digital.juror_response_special_needs:1
+ORACLEDB:NOTIFY_TEMPLATE_FIELD:1
+POSTGRES:juror_digital.notify_template_field:1
+ORACLEDB:NOTIFY_TEMPLATE_MAPPING:1
+POSTGRES:juror_digital.notify_template_mapping:1
+ORACLEDB:PAPER_RESPONSE:1
+POSTGRES:juror_digital.paper_response:1
+ORACLEDB:PAPER_RESPONSE_CJS_EMPLOYMENT:1
+POSTGRES:juror_digital.paper_response_cjs_employment:1
+ORACLEDB:PAPER_RESPONSE_SPECIAL_NEEDS:1
+POSTGRES:juror_digital.paper_response_special_needs:1
+ORACLEDB:POOL_EXTEND:1
+POSTGRES:juror_digital.pool_extend:1
+ORACLEDB:POOL_MEMBER_EXT:1
+POSTGRES:juror_digital.pool_member_ext:1
+ORACLEDB:POOL_REQUEST_EXT:1
+POSTGRES:juror_digital.pool_request_ext:1
+ORACLEDB:REGION_NOTIFY_TEMPLATE:1
+POSTGRES:juror_digital.region_notify_template:1
+ORACLEDB:STAFF:1
+POSTGRES:juror_digital.staff:1
+ORACLEDB:STAFF_AUDIT:1
+POSTGRES:juror_digital.staff_audit:1
+ORACLEDB:STAFF_JUROR_RESPONSE_AUDIT:1
+POSTGRES:juror_digital.staff_juror_response_audit:1
+ORACLEDB:STATS_AUTO_PROCESSED:1
+POSTGRES:juror_digital.stats_auto_processed:1
+ORACLEDB:STATS_DEFERRALS:1
+POSTGRES:juror_digital.stats_deferrals:1
+ORACLEDB:STATS_EXCUSALS:1
+POSTGRES:juror_digital.stats_excusals:1
+ORACLEDB:STATS_NOT_RESPONDED:1
+POSTGRES:juror_digital.stats_not_responded:1
+ORACLEDB:STATS_RESPONSE_TIMES:1
+POSTGRES:juror_digital.stats_response_times:1
+ORACLEDB:STATS_THIRDPARTY_ONLINE:1
+POSTGRES:juror_digital.stats_thirdparty_online:1
+ORACLEDB:STATS_UNPROCESSED_RESPONSES:1
+POSTGRES:juror_digital.stats_unprocessed_responses:1
+ORACLEDB:STATS_WELSH_ONLINE_RESPONSES:1
+POSTGRES:juror_digital.stats_welsh_online_responses:1
+ORACLEDB:SURVEY_RESPONSE:1
+POSTGRES:juror_digital.survey_response:1
+ORACLEDB:TEAM:1
+POSTGRES:juror_digital.team:1
+ORACLEDB:VOTERS:1
+POSTGRES:juror_digital.voters:1
+ORACLEDB:schema_version:1
+POSTGRES:juror_digital.schema_version:1
+[ERRORS PRIMARY KEYS COUNT]
+OK, Oracle and PostgreSQL have the same number of primary keys.
+
+[TEST CHECK CONSTRAINTS COUNT]
+ORACLEDB:APP_SETTINGS:0
+POSTGRES:juror_digital.app_settings:0
+ORACLEDB:BUREAU_AUTH:0
+POSTGRES:juror_digital.bureau_auth:0
+ORACLEDB:CHANGE_LOG:0
+POSTGRES:juror_digital.change_log:0
+ORACLEDB:CHANGE_LOG_ITEM:0
+POSTGRES:juror_digital.change_log_item:0
+ORACLEDB:CONTACT_LOG_EXT:0
+POSTGRES:juror_digital.contact_log_ext:0
+ORACLEDB:CORONER_POOL_EXT:0
+POSTGRES:juror_digital.coroner_pool_ext:0
+ORACLEDB:COURT_REGION:0
+POSTGRES:juror_digital.court_region:0
+ORACLEDB:COURT_WHITELIST:0
+POSTGRES:juror_digital.court_whitelist:0
+ORACLEDB:EXPENSES_RATES:0
+POSTGRES:juror_digital.expenses_rates:0
+ORACLEDB:JD_HOUSEKEEPING_AUDIT:0
+POSTGRES:juror_digital.jd_housekeeping_audit:0
+ORACLEDB:JUROR_RESPONSE:0
+POSTGRES:juror_digital.juror_response:0
+ORACLEDB:JUROR_RESPONSE_AUD:0
+POSTGRES:juror_digital.juror_response_aud:0
+ORACLEDB:JUROR_RESPONSE_CJS_EMPLOYMENT:0
+POSTGRES:juror_digital.juror_response_cjs_employment:0
+ORACLEDB:JUROR_RESPONSE_SPECIAL_NEEDS:0
+POSTGRES:juror_digital.juror_response_special_needs:0
+ORACLEDB:NOTIFY_TEMPLATE_FIELD:0
+POSTGRES:juror_digital.notify_template_field:0
+ORACLEDB:NOTIFY_TEMPLATE_MAPPING:0
+POSTGRES:juror_digital.notify_template_mapping:0
+ORACLEDB:PAPER_RESPONSE:0
+POSTGRES:juror_digital.paper_response:0
+ORACLEDB:PAPER_RESPONSE_CJS_EMPLOYMENT:0
+POSTGRES:juror_digital.paper_response_cjs_employment:0
+ORACLEDB:PAPER_RESPONSE_SPECIAL_NEEDS:0
+POSTGRES:juror_digital.paper_response_special_needs:0
+ORACLEDB:POOL_EXTEND:0
+POSTGRES:juror_digital.pool_extend:0
+ORACLEDB:POOL_MEMBER_EXT:0
+POSTGRES:juror_digital.pool_member_ext:0
+ORACLEDB:POOL_REQUEST_EXT:0
+POSTGRES:juror_digital.pool_request_ext:0
+ORACLEDB:REGION_NOTIFY_TEMPLATE:0
+POSTGRES:juror_digital.region_notify_template:0
+ORACLEDB:STAFF:0
+POSTGRES:juror_digital.staff:0
+ORACLEDB:STAFF_AUDIT:0
+POSTGRES:juror_digital.staff_audit:0
+ORACLEDB:STAFF_JUROR_RESPONSE_AUDIT:0
+POSTGRES:juror_digital.staff_juror_response_audit:0
+ORACLEDB:STATS_AUTO_PROCESSED:0
+POSTGRES:juror_digital.stats_auto_processed:0
+ORACLEDB:STATS_DEFERRALS:0
+POSTGRES:juror_digital.stats_deferrals:0
+ORACLEDB:STATS_EXCUSALS:0
+POSTGRES:juror_digital.stats_excusals:0
+ORACLEDB:STATS_NOT_RESPONDED:0
+POSTGRES:juror_digital.stats_not_responded:0
+ORACLEDB:STATS_RESPONSE_TIMES:0
+POSTGRES:juror_digital.stats_response_times:0
+ORACLEDB:STATS_THIRDPARTY_ONLINE:0
+POSTGRES:juror_digital.stats_thirdparty_online:0
+ORACLEDB:STATS_UNPROCESSED_RESPONSES:0
+POSTGRES:juror_digital.stats_unprocessed_responses:0
+ORACLEDB:STATS_WELSH_ONLINE_RESPONSES:0
+POSTGRES:juror_digital.stats_welsh_online_responses:0
+ORACLEDB:SURVEY_RESPONSE:0
+POSTGRES:juror_digital.survey_response:0
+ORACLEDB:TEAM:0
+POSTGRES:juror_digital.team:0
+ORACLEDB:VOTERS:0
+POSTGRES:juror_digital.voters:0
+ORACLEDB:schema_version:0
+POSTGRES:juror_digital.schema_version:0
+[ERRORS CHECK CONSTRAINTS COUNT]
+OK, Oracle and PostgreSQL have the same number of check constraints.
+
+[TEST NOT NULL CONSTRAINTS COUNT]
+ORACLEDB:APP_SETTINGS:1
+POSTGRES:juror_digital.app_settings:1
+ORACLEDB:BUREAU_AUTH:4
+POSTGRES:juror_digital.bureau_auth:2
+ORACLEDB:CHANGE_LOG:1
+POSTGRES:juror_digital.change_log:1
+ORACLEDB:CHANGE_LOG_ITEM:1
+POSTGRES:juror_digital.change_log_item:1
+ORACLEDB:CONTACT_LOG_EXT:4
+POSTGRES:juror_digital.contact_log_ext:3
+ORACLEDB:CORONER_POOL_EXT:3
+POSTGRES:juror_digital.coroner_pool_ext:2
+ORACLEDB:COURT_REGION:4
+POSTGRES:juror_digital.court_region:2
+ORACLEDB:COURT_WHITELIST:2
+POSTGRES:juror_digital.court_whitelist:1
+ORACLEDB:EXPENSES_RATES:1
+POSTGRES:juror_digital.expenses_rates:1
+ORACLEDB:JD_HOUSEKEEPING_AUDIT:0
+POSTGRES:juror_digital.jd_housekeeping_audit:0
+ORACLEDB:JUROR_RESPONSE:12
+POSTGRES:juror_digital.juror_response:6
+ORACLEDB:JUROR_RESPONSE_AUD:0
+POSTGRES:juror_digital.juror_response_aud:0
+ORACLEDB:JUROR_RESPONSE_CJS_EMPLOYMENT:7
+POSTGRES:juror_digital.juror_response_cjs_employment:4
+ORACLEDB:JUROR_RESPONSE_SPECIAL_NEEDS:7
+POSTGRES:juror_digital.juror_response_special_needs:4
+ORACLEDB:NOTIFY_TEMPLATE_FIELD:7
+POSTGRES:juror_digital.notify_template_field:4
+ORACLEDB:NOTIFY_TEMPLATE_MAPPING:6
+POSTGRES:juror_digital.notify_template_mapping:3
+ORACLEDB:PAPER_RESPONSE:4
+POSTGRES:juror_digital.paper_response:2
+ORACLEDB:PAPER_RESPONSE_CJS_EMPLOYMENT:5
+POSTGRES:juror_digital.paper_response_cjs_employment:3
+ORACLEDB:PAPER_RESPONSE_SPECIAL_NEEDS:5
+POSTGRES:juror_digital.paper_response_special_needs:3
+ORACLEDB:POOL_EXTEND:1
+POSTGRES:juror_digital.pool_extend:1
+ORACLEDB:POOL_MEMBER_EXT:3
+POSTGRES:juror_digital.pool_member_ext:3
+ORACLEDB:POOL_REQUEST_EXT:3
+POSTGRES:juror_digital.pool_request_ext:2
+ORACLEDB:REGION_NOTIFY_TEMPLATE:2
+POSTGRES:juror_digital.region_notify_template:1
+ORACLEDB:STAFF:1
+POSTGRES:juror_digital.staff:1
+ORACLEDB:STAFF_AUDIT:3
+POSTGRES:juror_digital.staff_audit:3
+ORACLEDB:STAFF_JUROR_RESPONSE_AUDIT:10
+POSTGRES:juror_digital.staff_juror_response_audit:5
+ORACLEDB:STATS_AUTO_PROCESSED:2
+POSTGRES:juror_digital.stats_auto_processed:1
+ORACLEDB:STATS_DEFERRALS:12
+POSTGRES:juror_digital.stats_deferrals:6
+ORACLEDB:STATS_EXCUSALS:12
+POSTGRES:juror_digital.stats_excusals:6
+ORACLEDB:STATS_NOT_RESPONDED:4
+POSTGRES:juror_digital.stats_not_responded:2
+ORACLEDB:STATS_RESPONSE_TIMES:10
+POSTGRES:juror_digital.stats_response_times:5
+ORACLEDB:STATS_THIRDPARTY_ONLINE:2
+POSTGRES:juror_digital.stats_thirdparty_online:1
+ORACLEDB:STATS_UNPROCESSED_RESPONSES:2
+POSTGRES:juror_digital.stats_unprocessed_responses:1
+ORACLEDB:STATS_WELSH_ONLINE_RESPONSES:2
+POSTGRES:juror_digital.stats_welsh_online_responses:1
+ORACLEDB:SURVEY_RESPONSE:4
+POSTGRES:juror_digital.survey_response:2
+ORACLEDB:TEAM:3
+POSTGRES:juror_digital.team:2
+ORACLEDB:VOTERS:8
+POSTGRES:juror_digital.voters:5
+ORACLEDB:schema_version:16
+POSTGRES:juror_digital.schema_version:8
+[ERRORS NOT NULL CONSTRAINTS COUNT]
+DIFF: Table juror_digital.bureau_auth doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror_digital.contact_log_ext doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (3).
+DIFF: Table juror_digital.coroner_pool_ext doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror_digital.court_region doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror_digital.court_whitelist doesn't have the same number of not null constraints in source database (2) and in PostgreSQL (1).
+DIFF: Table juror_digital.juror_response doesn't have the same number of not null constraints in source database (12) and in PostgreSQL (6).
+DIFF: Table juror_digital.juror_response_cjs_employment doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror_digital.juror_response_special_needs doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror_digital.notify_template_field doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror_digital.notify_template_mapping doesn't have the same number of not null constraints in source database (6) and in PostgreSQL (3).
+DIFF: Table juror_digital.paper_response doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror_digital.paper_response_cjs_employment doesn't have the same number of not null constraints in source database (5) and in PostgreSQL (3).
+DIFF: Table juror_digital.paper_response_special_needs doesn't have the same number of not null constraints in source database (5) and in PostgreSQL (3).
+DIFF: Table juror_digital.pool_request_ext doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror_digital.region_notify_template doesn't have the same number of not null constraints in source database (2) and in PostgreSQL (1).
+DIFF: Table juror_digital.staff_juror_response_audit doesn't have the same number of not null constraints in source database (10) and in PostgreSQL (5).
+DIFF: Table juror_digital.stats_auto_processed doesn't have the same number of not null constraints in source database (2) and in PostgreSQL (1).
+DIFF: Table juror_digital.stats_deferrals doesn't have the same number of not null constraints in source database (12) and in PostgreSQL (6).
+DIFF: Table juror_digital.stats_excusals doesn't have the same number of not null constraints in source database (12) and in PostgreSQL (6).
+DIFF: Table juror_digital.stats_not_responded doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror_digital.stats_response_times doesn't have the same number of not null constraints in source database (10) and in PostgreSQL (5).
+DIFF: Table juror_digital.stats_thirdparty_online doesn't have the same number of not null constraints in source database (2) and in PostgreSQL (1).
+DIFF: Table juror_digital.stats_unprocessed_responses doesn't have the same number of not null constraints in source database (2) and in PostgreSQL (1).
+DIFF: Table juror_digital.stats_welsh_online_responses doesn't have the same number of not null constraints in source database (2) and in PostgreSQL (1).
+DIFF: Table juror_digital.survey_response doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror_digital.team doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror_digital.voters doesn't have the same number of not null constraints in source database (8) and in PostgreSQL (5).
+DIFF: Table juror_digital.schema_version doesn't have the same number of not null constraints in source database (16) and in PostgreSQL (8).
+
+[TEST COLUMN DEFAULT VALUE COUNT]
+ORACLEDB:APP_SETTINGS:0
+POSTGRES:juror_digital.app_settings:0
+ORACLEDB:BUREAU_AUTH:0
+POSTGRES:juror_digital.bureau_auth:0
+ORACLEDB:CHANGE_LOG:0
+POSTGRES:juror_digital.change_log:0
+ORACLEDB:CHANGE_LOG_ITEM:0
+POSTGRES:juror_digital.change_log_item:0
+ORACLEDB:CONTACT_LOG_EXT:0
+POSTGRES:juror_digital.contact_log_ext:0
+ORACLEDB:CORONER_POOL_EXT:0
+POSTGRES:juror_digital.coroner_pool_ext:0
+ORACLEDB:COURT_REGION:0
+POSTGRES:juror_digital.court_region:0
+ORACLEDB:COURT_WHITELIST:0
+POSTGRES:juror_digital.court_whitelist:0
+ORACLEDB:EXPENSES_RATES:0
+POSTGRES:juror_digital.expenses_rates:0
+ORACLEDB:JD_HOUSEKEEPING_AUDIT:0
+POSTGRES:juror_digital.jd_housekeeping_audit:0
+ORACLEDB:JUROR_RESPONSE:9
+POSTGRES:juror_digital.juror_response:9
+ORACLEDB:JUROR_RESPONSE_AUD:0
+POSTGRES:juror_digital.juror_response_aud:0
+ORACLEDB:JUROR_RESPONSE_CJS_EMPLOYMENT:0
+POSTGRES:juror_digital.juror_response_cjs_employment:0
+ORACLEDB:JUROR_RESPONSE_SPECIAL_NEEDS:0
+POSTGRES:juror_digital.juror_response_special_needs:0
+ORACLEDB:NOTIFY_TEMPLATE_FIELD:1
+POSTGRES:juror_digital.notify_template_field:1
+ORACLEDB:NOTIFY_TEMPLATE_MAPPING:0
+POSTGRES:juror_digital.notify_template_mapping:0
+ORACLEDB:PAPER_RESPONSE:6
+POSTGRES:juror_digital.paper_response:6
+ORACLEDB:PAPER_RESPONSE_CJS_EMPLOYMENT:0
+POSTGRES:juror_digital.paper_response_cjs_employment:0
+ORACLEDB:PAPER_RESPONSE_SPECIAL_NEEDS:0
+POSTGRES:juror_digital.paper_response_special_needs:0
+ORACLEDB:POOL_EXTEND:1
+POSTGRES:juror_digital.pool_extend:1
+ORACLEDB:POOL_MEMBER_EXT:0
+POSTGRES:juror_digital.pool_member_ext:0
+ORACLEDB:POOL_REQUEST_EXT:0
+POSTGRES:juror_digital.pool_request_ext:0
+ORACLEDB:REGION_NOTIFY_TEMPLATE:0
+POSTGRES:juror_digital.region_notify_template:0
+ORACLEDB:STAFF:0
+POSTGRES:juror_digital.staff:0
+ORACLEDB:STAFF_AUDIT:0
+POSTGRES:juror_digital.staff_audit:0
+ORACLEDB:STAFF_JUROR_RESPONSE_AUDIT:0
+POSTGRES:juror_digital.staff_juror_response_audit:0
+ORACLEDB:STATS_AUTO_PROCESSED:1
+POSTGRES:juror_digital.stats_auto_processed:1
+ORACLEDB:STATS_DEFERRALS:0
+POSTGRES:juror_digital.stats_deferrals:0
+ORACLEDB:STATS_EXCUSALS:0
+POSTGRES:juror_digital.stats_excusals:0
+ORACLEDB:STATS_NOT_RESPONDED:1
+POSTGRES:juror_digital.stats_not_responded:1
+ORACLEDB:STATS_RESPONSE_TIMES:1
+POSTGRES:juror_digital.stats_response_times:1
+ORACLEDB:STATS_THIRDPARTY_ONLINE:1
+POSTGRES:juror_digital.stats_thirdparty_online:1
+ORACLEDB:STATS_UNPROCESSED_RESPONSES:1
+POSTGRES:juror_digital.stats_unprocessed_responses:1
+ORACLEDB:STATS_WELSH_ONLINE_RESPONSES:1
+POSTGRES:juror_digital.stats_welsh_online_responses:1
+ORACLEDB:SURVEY_RESPONSE:1
+POSTGRES:juror_digital.survey_response:1
+ORACLEDB:TEAM:0
+POSTGRES:juror_digital.team:0
+ORACLEDB:VOTERS:0
+POSTGRES:juror_digital.voters:0
+ORACLEDB:schema_version:1
+POSTGRES:juror_digital.schema_version:1
+[ERRORS COLUMN DEFAULT VALUE COUNT]
+OK, Oracle and PostgreSQL have the same number of column default value.
+
+[TEST FOREIGN KEYS COUNT]
+ORACLEDB:APP_SETTINGS:0
+POSTGRES:juror_digital.app_settings:0
+ORACLEDB:BUREAU_AUTH:0
+POSTGRES:juror_digital.bureau_auth:0
+ORACLEDB:CHANGE_LOG:0
+POSTGRES:juror_digital.change_log:0
+ORACLEDB:CHANGE_LOG_ITEM:0
+POSTGRES:juror_digital.change_log_item:0
+ORACLEDB:CONTACT_LOG_EXT:0
+POSTGRES:juror_digital.contact_log_ext:0
+ORACLEDB:CORONER_POOL_EXT:0
+POSTGRES:juror_digital.coroner_pool_ext:0
+ORACLEDB:COURT_REGION:0
+POSTGRES:juror_digital.court_region:0
+ORACLEDB:COURT_WHITELIST:0
+POSTGRES:juror_digital.court_whitelist:0
+ORACLEDB:EXPENSES_RATES:0
+POSTGRES:juror_digital.expenses_rates:0
+ORACLEDB:JD_HOUSEKEEPING_AUDIT:0
+POSTGRES:juror_digital.jd_housekeeping_audit:0
+ORACLEDB:JUROR_RESPONSE:0
+POSTGRES:juror_digital.juror_response:0
+ORACLEDB:JUROR_RESPONSE_AUD:0
+POSTGRES:juror_digital.juror_response_aud:0
+ORACLEDB:JUROR_RESPONSE_CJS_EMPLOYMENT:0
+POSTGRES:juror_digital.juror_response_cjs_employment:0
+ORACLEDB:JUROR_RESPONSE_SPECIAL_NEEDS:0
+POSTGRES:juror_digital.juror_response_special_needs:0
+ORACLEDB:NOTIFY_TEMPLATE_FIELD:0
+POSTGRES:juror_digital.notify_template_field:0
+ORACLEDB:NOTIFY_TEMPLATE_MAPPING:0
+POSTGRES:juror_digital.notify_template_mapping:0
+ORACLEDB:PAPER_RESPONSE:0
+POSTGRES:juror_digital.paper_response:0
+ORACLEDB:PAPER_RESPONSE_CJS_EMPLOYMENT:0
+POSTGRES:juror_digital.paper_response_cjs_employment:0
+ORACLEDB:PAPER_RESPONSE_SPECIAL_NEEDS:0
+POSTGRES:juror_digital.paper_response_special_needs:0
+ORACLEDB:POOL_EXTEND:0
+POSTGRES:juror_digital.pool_extend:0
+ORACLEDB:POOL_MEMBER_EXT:0
+POSTGRES:juror_digital.pool_member_ext:0
+ORACLEDB:POOL_REQUEST_EXT:0
+POSTGRES:juror_digital.pool_request_ext:0
+ORACLEDB:REGION_NOTIFY_TEMPLATE:0
+POSTGRES:juror_digital.region_notify_template:0
+ORACLEDB:STAFF:0
+POSTGRES:juror_digital.staff:0
+ORACLEDB:STAFF_AUDIT:0
+POSTGRES:juror_digital.staff_audit:0
+ORACLEDB:STAFF_JUROR_RESPONSE_AUDIT:0
+POSTGRES:juror_digital.staff_juror_response_audit:0
+ORACLEDB:STATS_AUTO_PROCESSED:0
+POSTGRES:juror_digital.stats_auto_processed:0
+ORACLEDB:STATS_DEFERRALS:0
+POSTGRES:juror_digital.stats_deferrals:0
+ORACLEDB:STATS_EXCUSALS:0
+POSTGRES:juror_digital.stats_excusals:0
+ORACLEDB:STATS_NOT_RESPONDED:0
+POSTGRES:juror_digital.stats_not_responded:0
+ORACLEDB:STATS_RESPONSE_TIMES:0
+POSTGRES:juror_digital.stats_response_times:0
+ORACLEDB:STATS_THIRDPARTY_ONLINE:0
+POSTGRES:juror_digital.stats_thirdparty_online:0
+ORACLEDB:STATS_UNPROCESSED_RESPONSES:0
+POSTGRES:juror_digital.stats_unprocessed_responses:0
+ORACLEDB:STATS_WELSH_ONLINE_RESPONSES:0
+POSTGRES:juror_digital.stats_welsh_online_responses:0
+ORACLEDB:SURVEY_RESPONSE:0
+POSTGRES:juror_digital.survey_response:0
+ORACLEDB:TEAM:0
+POSTGRES:juror_digital.team:0
+ORACLEDB:VOTERS:0
+POSTGRES:juror_digital.voters:0
+ORACLEDB:schema_version:0
+POSTGRES:juror_digital.schema_version:0
+[ERRORS FOREIGN KEYS COUNT]
+OK, Oracle and PostgreSQL have the same number of foreign keys.
+
+[TEST PARTITION COUNT]
+[ERRORS PARTITION COUNT]
+OK, Oracle and PostgreSQL have the same number of PARTITION.
+
+[TEST TABLE COUNT]
+ORACLEDB:TABLE:38
+POSTGRES:TABLE:38
+[ERRORS TABLE COUNT]
+OK, Oracle and PostgreSQL have the same number of TABLE.
+
+[TEST TABLE TRIGGERS COUNT]
+ORACLEDB:APP_SETTINGS:0
+POSTGRES:juror_digital.app_settings:0
+ORACLEDB:BUREAU_AUTH:0
+POSTGRES:juror_digital.bureau_auth:0
+ORACLEDB:CHANGE_LOG:0
+POSTGRES:juror_digital.change_log:0
+ORACLEDB:CHANGE_LOG_ITEM:0
+POSTGRES:juror_digital.change_log_item:0
+ORACLEDB:CONTACT_LOG_EXT:0
+POSTGRES:juror_digital.contact_log_ext:0
+ORACLEDB:CORONER_POOL_EXT:0
+POSTGRES:juror_digital.coroner_pool_ext:0
+ORACLEDB:COURT_REGION:0
+POSTGRES:juror_digital.court_region:0
+ORACLEDB:COURT_WHITELIST:0
+POSTGRES:juror_digital.court_whitelist:0
+ORACLEDB:EXPENSES_RATES:0
+POSTGRES:juror_digital.expenses_rates:0
+ORACLEDB:JD_HOUSEKEEPING_AUDIT:0
+POSTGRES:juror_digital.jd_housekeeping_audit:0
+ORACLEDB:JUROR_RESPONSE:0
+POSTGRES:juror_digital.juror_response:0
+ORACLEDB:JUROR_RESPONSE_AUD:0
+POSTGRES:juror_digital.juror_response_aud:0
+ORACLEDB:JUROR_RESPONSE_CJS_EMPLOYMENT:0
+POSTGRES:juror_digital.juror_response_cjs_employment:0
+ORACLEDB:JUROR_RESPONSE_SPECIAL_NEEDS:0
+POSTGRES:juror_digital.juror_response_special_needs:0
+ORACLEDB:NOTIFY_TEMPLATE_FIELD:0
+POSTGRES:juror_digital.notify_template_field:0
+ORACLEDB:NOTIFY_TEMPLATE_MAPPING:0
+POSTGRES:juror_digital.notify_template_mapping:0
+ORACLEDB:PAPER_RESPONSE:0
+POSTGRES:juror_digital.paper_response:0
+ORACLEDB:PAPER_RESPONSE_CJS_EMPLOYMENT:0
+POSTGRES:juror_digital.paper_response_cjs_employment:0
+ORACLEDB:PAPER_RESPONSE_SPECIAL_NEEDS:0
+POSTGRES:juror_digital.paper_response_special_needs:0
+ORACLEDB:POOL_EXTEND:0
+POSTGRES:juror_digital.pool_extend:0
+ORACLEDB:POOL_MEMBER_EXT:0
+POSTGRES:juror_digital.pool_member_ext:0
+ORACLEDB:POOL_REQUEST_EXT:0
+POSTGRES:juror_digital.pool_request_ext:0
+ORACLEDB:REGION_NOTIFY_TEMPLATE:0
+POSTGRES:juror_digital.region_notify_template:0
+ORACLEDB:STAFF:0
+POSTGRES:juror_digital.staff:0
+ORACLEDB:STAFF_AUDIT:0
+POSTGRES:juror_digital.staff_audit:0
+ORACLEDB:STAFF_JUROR_RESPONSE_AUDIT:0
+POSTGRES:juror_digital.staff_juror_response_audit:0
+ORACLEDB:STATS_AUTO_PROCESSED:0
+POSTGRES:juror_digital.stats_auto_processed:0
+ORACLEDB:STATS_DEFERRALS:0
+POSTGRES:juror_digital.stats_deferrals:0
+ORACLEDB:STATS_EXCUSALS:0
+POSTGRES:juror_digital.stats_excusals:0
+ORACLEDB:STATS_NOT_RESPONDED:0
+POSTGRES:juror_digital.stats_not_responded:0
+ORACLEDB:STATS_RESPONSE_TIMES:0
+POSTGRES:juror_digital.stats_response_times:0
+ORACLEDB:STATS_THIRDPARTY_ONLINE:0
+POSTGRES:juror_digital.stats_thirdparty_online:0
+ORACLEDB:STATS_UNPROCESSED_RESPONSES:0
+POSTGRES:juror_digital.stats_unprocessed_responses:0
+ORACLEDB:STATS_WELSH_ONLINE_RESPONSES:0
+POSTGRES:juror_digital.stats_welsh_online_responses:0
+ORACLEDB:SURVEY_RESPONSE:0
+POSTGRES:juror_digital.survey_response:0
+ORACLEDB:TEAM:0
+POSTGRES:juror_digital.team:0
+ORACLEDB:VOTERS:0
+POSTGRES:juror_digital.voters:0
+ORACLEDB:schema_version:0
+POSTGRES:juror_digital.schema_version:0
+[ERRORS TABLE TRIGGERS COUNT]
+OK, Oracle and PostgreSQL have the same number of table triggers.
+
+[TEST TRIGGER COUNT]
+ORACLEDB:TRIGGER:0
+POSTGRES:TRIGGER:0
+[ERRORS TRIGGER COUNT]
+OK, Oracle and PostgreSQL have the same number of TRIGGER.
+[2023-09-07 14:33:47] Looking for source database and PostgreSQL objects count...
+[2023-09-07 14:33:48] Collecting 4 tables in ALL_OBJECTS took:  1 wallclock secs ( 0.01 usr +  0.00 sys =  0.01 CPU)
+
+[TEST VIEW COUNT]
+ORACLEDB:VIEW:4
+POSTGRES:VIEW:5
+[ERRORS VIEW COUNT]
+DIFF: VIEW does not have the same count in source database (4) and in PostgreSQL (5).
+[2023-09-07 14:33:53] Looking for source database and PostgreSQL objects count...
+
+[TEST MVIEW COUNT]
+ORACLEDB:MVIEW:0
+POSTGRES:MVIEW:0
+[ERRORS MVIEW COUNT]
+OK, Oracle and PostgreSQL have the same number of MVIEW.
+[2023-09-07 14:33:54] Looking for source database and PostgreSQL objects count...
+
+[TEST SEQUENCE COUNT]
+ORACLEDB:SEQUENCE:4
+POSTGRES:SEQUENCE:4
+[ERRORS SEQUENCE COUNT]
+OK, Oracle and PostgreSQL have the same number of SEQUENCE.
+[2023-09-07 14:33:55] Looking for source database and PostgreSQL objects count...
+[2023-09-07 14:33:55] ORACLE_HOME = /opt/instant_client_12_2
+[2023-09-07 14:33:55] NLS_LANG = AMERICAN_AMERICA.AL32UTF8
+[2023-09-07 14:33:55] NLS_NCHAR = AL32UTF8
+[2023-09-07 14:33:55] Trying to connect to database: dbi:Oracle:host=172.17.0.4;sid=xe;port=1521
+[2023-09-07 14:33:55] Isolation level: SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+[2023-09-07 14:33:56] 	Found Type: VOTERSROWIDTYPE
+[2023-09-07 14:33:56] 	Found Type: VOTERSROWIDTABLE
+
+[TEST TYPE COUNT]
+ORACLEDB:TYPE:2
+POSTGRES:TYPE:4
+[ERRORS TYPE COUNT]
+DIFF: TYPE does not have the same count in source database (2) and in PostgreSQL (4).
+[2023-09-07 14:33:56] Looking for source database and PostgreSQL objects count...
+
+[TEST FDW COUNT]
+ORACLEDB:FDW:0
+POSTGRES:FDW:0
+[ERRORS FDW COUNT]
+OK, Oracle and PostgreSQL have the same number of FDW.
+[2023-09-07 14:33:57] Looking for functions count related to source database and PostgreSQL functions...
+
+[TEST FUNCTION COUNT]
+ORACLEDB:FUNCTION:2
+POSTGRES:FUNCTION:81
+[ERRORS FUNCTION COUNT]
+DIFF: FUNCTION does not have the same count in source database (2) and in PostgreSQL (81).
+
+[2023-09-07 14:33:59] Looking for last values related to source database and PostgreSQL sequences...
+
+[TEST SEQUENCE VALUES]
+ORACLEDB:CHANGE_LOG_ITEM_SEQ:1000
+POSTGRES:juror_digital.change_log_item_seq:1000
+ORACLEDB:CHANGE_LOG_SEQ:1000
+POSTGRES:juror_digital.change_log_seq:1000
+ORACLEDB:CJS_EMPLOYMENT_SEQ:1000
+POSTGRES:juror_digital.cjs_employment_seq:1000
+ORACLEDB:SPEC_NEED_SEQ:1000
+POSTGRES:juror_digital.spec_need_seq:1000
+[ERRORS SEQUENCE VALUES COUNT]
+OK, Oracle and PostgreSQL have the same number of sequence values.
+

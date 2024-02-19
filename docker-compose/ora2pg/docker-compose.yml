@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  ora2pg:
+    image: ora2pg
+    restart: unless-stopped
+    container_name: ora2pg
+    environment:
+      ORACLE_USERNAME: $ORACLE_USERNAME
+      ORACLE_PASSWORD: $ORACLE_PASSWORD
+      PG_USERNAME: $POSTGRES_USERNAME
+      PG_PASSWORD: $POSTGRES_PASSWORD
+    volumes:
+        - type: bind
+          source: ../../migration
+          target: /app/migration
+    network_mode: "bridge"

@@ -1,0 +1,118 @@
+[2023-09-25 14:21:47] Ora2Pg version: 24.0
+[2023-09-25 14:21:47] Export type: TEST
+[2023-09-25 14:21:47] Geometry export type: INTERNAL
+[2023-09-25 14:21:47] ORACLE_HOME = /opt/instant_client_12_2
+[2023-09-25 14:21:47] NLS_LANG = AMERICAN_AMERICA.AL32UTF8
+[2023-09-25 14:21:47] NLS_NCHAR = AL32UTF8
+[2023-09-25 14:21:47] Trying to connect to database: dbi:Oracle:host=10.0.0.5;sid=xe;port=1521
+[2023-09-25 14:21:47] Isolation level: SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+[2023-09-25 14:21:47] Force Oracle to compile schema JUROR_DIGITAL_USER before code extraction
+[2023-09-25 14:21:50] Looking for objects count related to source database and PostgreSQL tables...
+[2023-09-25 14:21:50] Collecting 49 tables in ALL_OBJECTS took:  0 wallclock secs ( 0.01 usr +  0.00 sys =  0.01 CPU)
+[2023-09-25 14:21:50] Collecting 0 tables information in ALL_TABLES took:  0 wallclock secs ( 0.01 usr +  0.01 sys =  0.02 CPU)
+[TEST COLUMNS COUNT]
+[ERRORS COLUMNS COUNT]
+OK, Oracle and PostgreSQL have the same number of columns.
+[TEST INDEXES COUNT]
+[2023-09-25 14:22:16] Collecting 0 indexes in ALL_INDEXES took: 26 wallclock secs ( 0.01 usr +  0.01 sys =  0.02 CPU)
+[ERRORS INDEXES COUNT]
+OK, Oracle and PostgreSQL have the same number of indexes.
+
+[TEST UNIQUE CONSTRAINTS COUNT]
+[ERRORS UNIQUE CONSTRAINTS COUNT]
+OK, Oracle and PostgreSQL have the same number of unique constraints.
+
+[TEST PRIMARY KEYS COUNT]
+[ERRORS PRIMARY KEYS COUNT]
+OK, Oracle and PostgreSQL have the same number of primary keys.
+
+[TEST CHECK CONSTRAINTS COUNT]
+[ERRORS CHECK CONSTRAINTS COUNT]
+OK, Oracle and PostgreSQL have the same number of check constraints.
+
+[TEST NOT NULL CONSTRAINTS COUNT]
+[ERRORS NOT NULL CONSTRAINTS COUNT]
+OK, Oracle and PostgreSQL have the same number of not null constraints.
+
+[TEST COLUMN DEFAULT VALUE COUNT]
+[ERRORS COLUMN DEFAULT VALUE COUNT]
+OK, Oracle and PostgreSQL have the same number of column default value.
+
+[TEST FOREIGN KEYS COUNT]
+[ERRORS FOREIGN KEYS COUNT]
+OK, Oracle and PostgreSQL have the same number of foreign keys.
+
+[TEST PARTITION COUNT]
+[ERRORS PARTITION COUNT]
+OK, Oracle and PostgreSQL have the same number of PARTITION.
+
+[TEST TABLE COUNT]
+ORACLEDB:TABLE:0
+POSTGRES:TABLE:0
+[ERRORS TABLE COUNT]
+OK, Oracle and PostgreSQL have the same number of TABLE.
+
+[TEST TABLE TRIGGERS COUNT]
+[ERRORS TABLE TRIGGERS COUNT]
+OK, Oracle and PostgreSQL have the same number of table triggers.
+
+[TEST TRIGGER COUNT]
+ORACLEDB:TRIGGER:0
+POSTGRES:TRIGGER:0
+[ERRORS TRIGGER COUNT]
+OK, Oracle and PostgreSQL have the same number of TRIGGER.
+[2023-09-25 14:23:52] Looking for source database and PostgreSQL objects count...
+[2023-09-25 14:23:52] Collecting 49 tables in ALL_OBJECTS took:  0 wallclock secs ( 0.01 usr +  0.00 sys =  0.01 CPU)
+
+[TEST VIEW COUNT]
+ORACLEDB:VIEW:49
+POSTGRES:VIEW:49
+[ERRORS VIEW COUNT]
+OK, Oracle and PostgreSQL have the same number of VIEW.
+[2023-09-25 14:24:19] Looking for source database and PostgreSQL objects count...
+
+[TEST MVIEW COUNT]
+ORACLEDB:MVIEW:0
+POSTGRES:MVIEW:0
+[ERRORS MVIEW COUNT]
+OK, Oracle and PostgreSQL have the same number of MVIEW.
+[2023-09-25 14:24:19] Looking for source database and PostgreSQL objects count...
+
+[TEST SEQUENCE COUNT]
+ORACLEDB:SEQUENCE:0
+POSTGRES:SEQUENCE:0
+[ERRORS SEQUENCE COUNT]
+OK, Oracle and PostgreSQL have the same number of SEQUENCE.
+[2023-09-25 14:24:19] Looking for source database and PostgreSQL objects count...
+[2023-09-25 14:24:19] ORACLE_HOME = /opt/instant_client_12_2
+[2023-09-25 14:24:19] NLS_LANG = AMERICAN_AMERICA.AL32UTF8
+[2023-09-25 14:24:19] NLS_NCHAR = AL32UTF8
+[2023-09-25 14:24:19] Trying to connect to database: dbi:Oracle:host=10.0.0.5;sid=xe;port=1521
+[2023-09-25 14:24:19] Isolation level: SET TRANSACTION ISOLATION LEVEL SERIALIZABLE
+
+[TEST TYPE COUNT]
+ORACLEDB:TYPE:0
+POSTGRES:TYPE:0
+[ERRORS TYPE COUNT]
+OK, Oracle and PostgreSQL have the same number of TYPE.
+[2023-09-25 14:24:19] Looking for source database and PostgreSQL objects count...
+
+[TEST FDW COUNT]
+ORACLEDB:FDW:0
+POSTGRES:FDW:0
+[ERRORS FDW COUNT]
+OK, Oracle and PostgreSQL have the same number of FDW.
+[2023-09-25 14:24:19] Looking for functions count related to source database and PostgreSQL functions...
+
+[TEST FUNCTION COUNT]
+ORACLEDB:FUNCTION:0
+POSTGRES:FUNCTION:90
+[ERRORS FUNCTION COUNT]
+DIFF: FUNCTION does not have the same count in source database (0) and in PostgreSQL (90).
+
+[2023-09-25 14:24:22] Looking for last values related to source database and PostgreSQL sequences...
+
+[TEST SEQUENCE VALUES]
+[ERRORS SEQUENCE VALUES COUNT]
+OK, Oracle and PostgreSQL have the same number of sequence values.
+

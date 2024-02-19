@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Ora2Pg - Database Migration Report</title>
+  <meta HTTP-EQUIV="Generator" CONTENT="Ora2Pg v24.0">
+  <meta HTTP-EQUIV="Date" CONTENT="Fri Aug 25 15:31:35 2023">
+  <style>
+body {
+	margin: 30px 0;
+	padding: 0;
+	background: #EFEFEF;
+	font-size: 12px;
+	color: #1e1e1e;
+}
+
+h1 {
+	margin-bottom: 20px;
+	border-bottom: 1px solid #DFDFDF;
+	font-size: 22px;
+	padding: 0px;
+	padding-bottom: 5px;
+	font-weight: bold;
+	color: #0094C7;
+}
+
+h2 {
+	margin-bottom: 10px;
+	font-size: 18px;
+	padding: 0px;
+	padding-bottom: 5px;
+	font-weight: bold;
+	color: #0094C7;
+}
+
+#header table {
+	padding: 0 5px 0 5px;
+	border: 1px solid #DBDBDB;
+	margin-bottom: 20px;
+	margin-left: 30px;
+}
+
+#header th {
+	padding: 0 5px 0 5px;
+	text-decoration: none;
+	font-size: 16px;
+	color: #EC5800;
+}
+
+#content table {
+	padding: 0 5px 0 5px;
+	border: 1px solid #DBDBDB;
+	margin-bottom: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#content td {
+	padding: 0 5px 0 5px;
+	border-bottom: 1px solid #888888;
+	margin-bottom: 20px;
+	text-align: left;
+	vertical-align: top;
+}
+
+#content th {
+	border-bottom: 1px solid #BBBBBB;
+	padding: 0 5px 0 5px;
+	text-decoration: none;
+	font-size: 16px;
+	color: #EC5800;
+}
+
+.object_name {
+        font-weight: bold;
+        color: #0094C7;
+	text-align: left;
+	white-space: pre;
+}
+
+.detail {
+	white-space: pre;
+}
+
+#footer {
+	margin-right: 10px;
+	text-align: right;
+}
+
+#footer a {
+	color: #EC5800;
+}
+
+#footer a:hover {
+	text-decoration: none;
+}
+  </style>
+</head>
+<body>
+<div id="header">
+<h1>Ora2Pg - Database Migration Report</h1>
+<table>
+<tr><th>Version</th><td>Oracle Database 11g Express Edition Release 11.2.0.2.0</td></tr>
+<tr><th>Schema</th><td>JUROR_DIGITAL</td></tr>
+<tr><th>Size</th><td>28.75 MB</td></tr>
+</table>
+</div>
+<div id="content">
+<table>
+<tr><th>Object</th><th>Number</th><th>Invalid</th><th>Estimated cost</th><th>Comments</th><th>Details</th></tr>
+<tr><td class="object_name">DATABASE LINK</td><td style="text-align: center;">0</td><td style="text-align: center;">0</td><td style="text-align: center;">0.00</td><td>Database links will be exported as SQL/MED PostgreSQL's Foreign Data Wrapper (FDW) extensions using oracle_fdw.</td><td class="detail"></td></tr>
+<tr><td class="object_name">FUNCTION</td><td style="text-align: center;">1</td><td style="text-align: center;">0</td><td style="text-align: center;">21.20</td><td>Total size of function code: 2844 bytes.</td><td class="detail"><details><summary>See details</summary>get_voters: 20.2<br></details></td></tr>
+<tr><td class="object_name">GLOBAL TEMPORARY TABLE</td><td style="text-align: center;">0</td><td style="text-align: center;">0</td><td style="text-align: center;">0.00</td><td>Global temporary table are not supported by PostgreSQL and will not be exported. You will have to rewrite some application code to match the PostgreSQL temporary table behavior.</td><td class="detail"></td></tr>
+<tr><td class="object_name">INDEX</td><td style="text-align: center;">39</td><td style="text-align: center;">0</td><td style="text-align: center;">4.30</td><td>2 index(es) are concerned by the export, others are automatically generated and will do so on PostgreSQL. Bitmap will be exported as btree_gin index(es). Domain index are exported as b-tree but commented to be edited to mainly use FTS. Cluster, bitmap join and IOT indexes will not be exported at all. Reverse indexes are not exported too, you may use a trigram-based index (see pg_trgm) or a reverse() function based index and search. Use 'varchar_pattern_ops', 'text_pattern_ops' or 'bpchar_pattern_ops' operators in your indexes to improve search with the LIKE operator respectively into varchar, text or char columns.</td><td class="detail"><details><summary>See details</summary>1 function based b-tree index(es)<br>1 b-tree index(es)<br></details></td></tr>
+<tr><td class="object_name">JOB</td><td style="text-align: center;">0</td><td style="text-align: center;">0</td><td style="text-align: center;">0.00</td><td>Job are not exported. You may set external cron job with them.</td><td class="detail"></td></tr>
+<tr><td class="object_name">PROCEDURE</td><td style="text-align: center;">1</td><td style="text-align: center;">0</td><td style="text-align: center;">5.00</td><td>Total size of procedure code: 592 bytes.</td><td class="detail"><details><summary>See details</summary>reset_seq: 4<br></details></td></tr>
+<tr><td class="object_name">SEQUENCE</td><td style="text-align: center;">4</td><td style="text-align: center;">0</td><td style="text-align: center;">1.00</td><td>Sequences are fully supported, but all call to sequence_name.NEXTVAL or sequence_name.CURRVAL will be transformed into NEXTVAL('sequence_name') or CURRVAL('sequence_name').</td><td class="detail"></td></tr>
+<tr><td class="object_name">SYNONYM</td><td style="text-align: center;">0</td><td style="text-align: center;">0</td><td style="text-align: center;">0.00</td><td>SYNONYMs will be exported as views. SYNONYMs do not exists with PostgreSQL but a common workaround is to use views or set the PostgreSQL search_path in your session to access object outside the current schema.</td><td class="detail"></td></tr>
+<tr><td class="object_name">TABLE</td><td style="text-align: center;">39</td><td style="text-align: center;">0</td><td style="text-align: center;">3.90</td><td></td><td class="detail"><details><summary>See details</summary>Total number of rows: 39<br>Top 10 of tables sorted by number of rows:<br>stats_deferrals has 1 rows<br>contact_log_ext has 1 rows<br>bureau_auth has 1 rows<br>juror_response has 1 rows<br>voters has 1 rows<br>stats_excusals has 1 rows<br>court_region has 1 rows<br>pool_extend has 1 rows<br>staff_audit has 1 rows<br>stats_thirdparty_online has 1 rows<br>Top 10 of largest tables:<br></details></td></tr>
+<tr><td class="object_name">TYPE</td><td style="text-align: center;">2</td><td style="text-align: center;">0</td><td style="text-align: center;">2.00</td><td>2 type(s) are concerned by the export, others are not supported. Note that Type inherited and Subtype are converted as table, type inheritance is not supported.</td><td class="detail"><details><summary>See details</summary>1 nested tables<br>1 object type<br></details></td></tr>
+<tr><td class="object_name">VIEW</td><td style="text-align: center;">5</td><td style="text-align: center;">0</td><td style="text-align: center;">5.00</td><td>Views are fully supported but can use specific functions.</td><td class="detail"></td></tr>
+<tr><th style="text-align: center; border-bottom: 0px; vertical-align: bottom;">Total</th><td style="text-align: center; border-bottom: 0px; vertical-align: bottom;">91</td><td style="text-align: center; border-bottom: 0px; vertical-align: bottom;">0</td><td style="text-align: center; border-bottom: 0px; vertical-align: bottom;">42.40</td><td colspan="2" style="border-bottom: 0px; vertical-align: bottom;">42.40 cost migration units means approximatively 1 person-day(s). The migration unit was set to 5 minute(s)
+</td></tr>
+</table>
+</div>
+<h2>Migration level: B-5</h2>
+
+<ul>
+<li>Migration levels:</li>
+  <ul>
+    <li>A - Migration that might be run automatically</li>
+    <li>B - Migration with code rewrite and a human-days cost up to 5 days</li>
+    <li>C - Migration with code rewrite and a human-days cost above 5 days</li>
+  </ul>
+<li>Technical levels:</li>
+  <ul>
+    <li>1 = trivial: no stored functions and no triggers</li>
+    <li>2 = easy: no stored functions but with triggers, no manual rewriting</li>
+    <li>3 = simple: stored functions and/or triggers, no manual rewriting</li>
+    <li>4 = manual: no stored functions but with triggers or views with code rewriting</li>
+    <li>5 = difficult: stored functions and/or triggers with code rewriting</li>
+  </ul>
+</ul>
+<h2>Details of cost assessment per function</h2>
+<details><summary>Show</summary><ul>
+<li>Function get_voters total estimated cost: 20.2</li>
+<ul>
+<li>CONCAT => 22 (cost: 0.1)</li>
+<li>SIZE => 2</li>
+<li>TEST => 2</li>
+<li>IS TABLE OF => 2 (cost: 4)</li>
+<li>CURSOR => 1 (cost: 1)</li>
+<li>BULK COLLECT => 1 (cost: 5)</li>
+</ul>
+</ul></details>
+<h2>Details of cost assessment per procedure</h2>
+<details><summary>Show</summary><ul>
+<li>Procedure reset_seq total estimated cost: 4</li>
+<ul>
+<li>CONCAT => 10 (cost: 0.1)</li>
+<li>TEST => 2</li>
+<li>SIZE => 1</li>
+</ul>
+</ul></details>
+
+<div id="footer">
+Generated by <a href="http://ora2pg.darold.net/">Ora2Pg v24.0</a>
+</div>
+</body>
+</html>

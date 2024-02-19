@@ -1,3 +1,10 @@
+# Note - need to set up environment variables for database username and password if running locally
+export ORACLE_USERNAME=....
+export ORACLE_PASSWORD=....
+export POSTGRES_USERNAME=....
+export POSTGRES_PASSWORD=....
+
+
 # How to setup the Postgresql database (Dev Environment)
 
 You'll need to make sure that you have a PAT (Personal Access Token) generated, to make one you'll need to click on your profile picture
@@ -54,10 +61,10 @@ whilst the container is starting and the database is loading you can setup a db 
 Set the following values for the rest of the properties:
 
 * Host - localhost
-* database - juror
+* database - e.g juror
 * port - 5432
-* username - e.g system
-* password - e.g postgres
+* username - <username>
+* password - <password>
 
 press ok and try to connect the database, and if successful you should be able to browse the database using DBeaver.
 
@@ -73,7 +80,7 @@ outside the container:
 psql -U <username> -h <localhost/ipaddress of machine> <database>
 ```
 
-If you're running this inside the container you won't be prompted for the password as it uses a trust policy, but if asked, use the default
+If you're running this inside the container you won't be prompted for the password as it uses a trust policy, but if asked, then enter the password
 and hit enter and you should be connected to the database.
 # How to run the migration tool
 
@@ -113,12 +120,10 @@ You will want to edit the config file located in the config folder and edit the 
 
 ```
 ORACLE_DSN	dbi:Oracle:host=<ip address of oracle db>;sid=xe;port=1521
-ORACLE_USER	e.g system
-ORACLE_PWD      e.g oracle
+Note - username and password are provided via the ENV VARs
 
-PG_DSN		dbi:Pg:dbname=<database>;host=<ip address of postgres db>;port=5432
-PG_USER	        e.g system
-PG_PWD	        e.g postgres
+PG_DSN		dbi:Pg:dbname=juror;host=<ip address of postgres db>;port=5432
+Note - username and password are provided via the ENV VARs
 
 You need to set the PGPASSWORD environment variable in order for the import script to stop you prompting for the password every step, in order to do this run the following:
 ```
@@ -220,13 +225,12 @@ e.g. ora2pg --project_base /app/migration --init_project JUROR
 ```
 ORACLE_HOME	/opt/instant_client_12_2 - this is where the instant client lives
 ORACLE_DSN	dbi:Oracle:host=172.17.0.5;sid=xe;port=1521 - This is the connection string
-ORACLE_USER	e.g system
-ORACLE_PWD      e.g oracle
+ORACLE_USER	$ORACLE_USERNAME
+ORACLE_PWD $ORACLE_PASSWORD
 USER_GRANTS	0 - This has been set to zero to grab the existing users from the oracle DB
 DEBUG		1 - Can set this optionally to zero but was useful to see what the tool was doing
 ```
 ### export_schema.sh
 
 ### import_all.sh
-
 

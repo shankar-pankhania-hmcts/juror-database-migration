@@ -1,0 +1,188 @@
+[TEST CHECK CONSTRAINTS COUNT]
+[ERRORS CHECK CONSTRAINTS COUNT]
+DIFF: Table juror.juror doesn't have the same number of check constraints in source database (4) and in PostgreSQL (0).
+DIFF: Table juror.juror_court_police_check doesn't have the same number of check constraints in source database (4) and in PostgreSQL (0).
+DIFF: Table juror.pl_xml_status doesn't have the same number of check constraints in source database (2) and in PostgreSQL (0).
+
+[TEST NOT NULL CONSTRAINTS COUNT]
+[ERRORS NOT NULL CONSTRAINTS COUNT]
+DIFF: Table juror.acct_pay_data doesn't have the same number of not null constraints in source database (9) and in PostgreSQL (5).
+DIFF: Table juror.aramis_payments doesn't have the same number of not null constraints in source database (19) and in PostgreSQL (10).
+DIFF: Table juror.attendance doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (3).
+DIFF: Table juror.audit_report doesn't have the same number of not null constraints in source database (6) and in PostgreSQL (4).
+DIFF: Table juror.condition doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror.coroner_pool doesn't have the same number of not null constraints in source database (11) and in PostgreSQL (6).
+DIFF: Table juror.coroner_pool_detail doesn't have the same number of not null constraints in source database (10) and in PostgreSQL (5).
+DIFF: Table juror.court_catchment_area doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror.court_group doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.court_location doesn't have the same number of not null constraints in source database (5) and in PostgreSQL (3).
+DIFF: Table juror.db_version doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror.defer_dbf doesn't have the same number of not null constraints in source database (6) and in PostgreSQL (4).
+DIFF: Table juror.def_denied doesn't have the same number of not null constraints in source database (6) and in PostgreSQL (4).
+DIFF: Table juror.def_lett doesn't have the same number of not null constraints in source database (6) and in PostgreSQL (4).
+DIFF: Table juror.disposal_condition doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror.disposition doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.disq_lett doesn't have the same number of not null constraints in source database (6) and in PostgreSQL (4).
+DIFF: Table juror.dis_code doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.exc_code doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.exc_denied_lett doesn't have the same number of not null constraints in source database (5) and in PostgreSQL (3).
+DIFF: Table juror.exc_lett doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (3).
+DIFF: Table juror.export_placeholders doesn't have the same number of not null constraints in source database (8) and in PostgreSQL (4).
+DIFF: Table juror.form_attr doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror.fta_lett doesn't have the same number of not null constraints in source database (5) and in PostgreSQL (4).
+DIFF: Table juror.holidays doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (3).
+DIFF: Table juror.ineligible_code doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror.judge doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (3).
+DIFF: Table juror.juror doesn't have the same number of not null constraints in source database (9) and in PostgreSQL (5).
+DIFF: Table juror.juror_court_police_check doesn't have the same number of not null constraints in source database (10) and in PostgreSQL (6).
+DIFF: Table juror.juror_tables doesn't have the same number of not null constraints in source database (8) and in PostgreSQL (5).
+DIFF: Table juror.location doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (3).
+DIFF: Table juror.manuals doesn't have the same number of not null constraints in source database (19) and in PostgreSQL (10).
+DIFF: Table juror.manuals_status doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (2).
+DIFF: Table juror.messages doesn't have the same number of not null constraints in source database (10) and in PostgreSQL (5).
+DIFF: Table juror.panel doesn't have the same number of not null constraints in source database (5) and in PostgreSQL (4).
+DIFF: Table juror.part_amendments doesn't have the same number of not null constraints in source database (6) and in PostgreSQL (3).
+DIFF: Table juror.part_hist doesn't have the same number of not null constraints in source database (10) and in PostgreSQL (5).
+DIFF: Table juror.password doesn't have the same number of not null constraints in source database (6) and in PostgreSQL (4).
+DIFF: Table juror.phoenix_temp doesn't have the same number of not null constraints in source database (10) and in PostgreSQL (5).
+DIFF: Table juror.phone_log doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (5).
+DIFF: Table juror.pl_xml_status doesn't have the same number of not null constraints in source database (9) and in PostgreSQL (5).
+DIFF: Table juror.pnc_proxy doesn't have the same number of not null constraints in source database (2) and in PostgreSQL (1).
+DIFF: Table juror.pool doesn't have the same number of not null constraints in source database (15) and in PostgreSQL (9).
+DIFF: Table juror.pool_comments doesn't have the same number of not null constraints in source database (6) and in PostgreSQL (3).
+DIFF: Table juror.pool_hist doesn't have the same number of not null constraints in source database (8) and in PostgreSQL (4).
+DIFF: Table juror.pool_stats doesn't have the same number of not null constraints in source database (24) and in PostgreSQL (13).
+DIFF: Table juror.pool_status doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.pool_type doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.postpone_lett doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (3).
+DIFF: Table juror.print_files doesn't have the same number of not null constraints in source database (9) and in PostgreSQL (5).
+DIFF: Table juror.release_lett doesn't have the same number of not null constraints in source database (4) and in PostgreSQL (3).
+DIFF: Table juror.seating_plan doesn't have the same number of not null constraints in source database (6) and in PostgreSQL (4).
+DIFF: Table juror.security_level doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (5).
+DIFF: Table juror.system_file doesn't have the same number of not null constraints in source database (32) and in PostgreSQL (17).
+DIFF: Table juror.system_parameter doesn't have the same number of not null constraints in source database (6) and in PostgreSQL (3).
+DIFF: Table juror.trial doesn't have the same number of not null constraints in source database (10) and in PostgreSQL (6).
+DIFF: Table juror.trial_can_reas doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.trial_charge_code doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.t_history_code doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.t_id_check doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.t_jurisdiction doesn't have the same number of not null constraints in source database (5) and in PostgreSQL (3).
+DIFF: Table juror.t_message_template doesn't have the same number of not null constraints in source database (8) and in PostgreSQL (4).
+DIFF: Table juror.t_phone doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.t_police doesn't have the same number of not null constraints in source database (2) and in PostgreSQL (1).
+DIFF: Table juror.t_special doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.t_type doesn't have the same number of not null constraints in source database (3) and in PostgreSQL (2).
+DIFF: Table juror.unique_pool doesn't have the same number of not null constraints in source database (10) and in PostgreSQL (6).
+DIFF: Table juror.voters127 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters401 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters402 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters403 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters404 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters406 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters407 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters408 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters409 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters410 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters411 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters412 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters413 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters414 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters415 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters416 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters417 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters418 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters419 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters420 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters421 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters422 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters423 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters424 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters425 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters426 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters427 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters428 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters429 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters430 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters431 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters432 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters433 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters434 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters435 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters436 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters437 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters439 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters440 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters441 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters442 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters443 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters444 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters445 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters446 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters447 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters448 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters449 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters450 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters451 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters452 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters453 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters454 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters455 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters456 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters457 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters458 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters459 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters460 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters461 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters462 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters463 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters464 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters465 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters466 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters467 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters468 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters469 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters470 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters471 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters472 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters473 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters474 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters475 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters476 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters477 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters478 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters479 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters480 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters626 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters750 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters751 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters754 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters755 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters756 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters758 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters761 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters762 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters765 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters767 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters768 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters769 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters772 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters774 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters794 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters795 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters796 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters797 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters798 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.voters799 doesn't have the same number of not null constraints in source database (7) and in PostgreSQL (4).
+DIFF: Table juror.welsh_location doesn't have the same number of not null constraints in source database (5) and in PostgreSQL (3).
+
+[TEST TYPE COUNT]
+ORACLEDB:TYPE:2
+POSTGRES:TYPE:9
+[ERRORS TYPE COUNT]
+DIFF: TYPE does not have the same count in source database (2) and in PostgreSQL (9).
+
+[TEST FUNCTION COUNT]
+ORACLEDB:FUNCTION:37
+POSTGRES:FUNCTION:79
+[ERRORS FUNCTION COUNT]
+DIFF: FUNCTION does not have the same count in source database (37) and in PostgreSQL (79).

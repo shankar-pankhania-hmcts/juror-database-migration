@@ -1,0 +1,28 @@
+/*
+ * Task 5516: Develop migration script for the CONTENT_STORE table
+ * 
+ * CONTENT_STORE
+ * -------------
+ * 
+ */
+
+TRUNCATE TABLE juror_mod.content_store RESTART IDENTITY CASCADE;
+
+WITH ROWS
+AS
+(
+	INSERT INTO juror_mod.content_store(request_id,document_id,date_on_q_for_send,file_type,date_sent,data)
+	SELECT  cs.request_id,
+			cs.document_id,
+			cs.date_on_q_for_send,
+			cs.file_type,
+			cs.date_sent,
+			cs.data
+	FROM juror.content_store cs
+	RETURNING 1
+)
+SELECT COUNT(*) FROM ROWS;  -- ROWS UPDATED
+
+-- verify results
+select count(*) from juror.content_store;
+select * from juror_mod.content_store limit 10;

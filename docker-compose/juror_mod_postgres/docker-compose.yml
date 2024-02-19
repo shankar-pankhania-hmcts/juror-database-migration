@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  juror_postgres:
+    image: gitlab-registry.clouddev.online/juror-digital/moj-juror/oracle-to-postgressql-migration/juror_mod_postgres
+    restart: unless-stopped
+    container_name: juror_postgres
+    volumes:
+      - ./migration:/app/migration
+    network_mode: "bridge"
+    ports:
+      - 5432:5432
