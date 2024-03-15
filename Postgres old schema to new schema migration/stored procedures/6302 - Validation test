@@ -1,0 +1,93 @@
+delete from juror_mod.juror_pool;
+delete from juror_mod.pool ;
+delete from juror_mod.juror;
+
+create temp table expected_juror_pool (
+	pool_number varchar(9), 
+	juror_number varchar(9), 
+	"owner" varchar(3), 
+	status integer
+);
+
+create temp table expected_juror (
+	juror_number varchar(9), 
+	last_name varchar, 
+	first_name varchar, 
+	address_line_1 varchar, 
+	responded boolean,
+	bureau_transfer_date date
+);
+
+create temp table expected_pool (
+	return_date date,
+	pool_no varchar(9),
+	"owner" varchar(3), 
+	loc_code varchar(3), 
+	total_no_required integer
+);
+
+-- Expected results after calling the stored procedure
+insert into expected_pool (pool_no, return_date, "owner", loc_code, total_no_required) values 
+('1', current_date, '415', '415', '10');
+
+insert into expected_juror (juror_number, last_name, first_name, address_line_1, responded, bureau_transfer_date) values 
+('1', 'test', 'test', 'test', true, current_date),
+('2', 'test', 'test', 'test', true, current_date),
+('3', 'test', 'test', 'test', true, current_date),
+('4', 'test', 'test', 'test', true, null),
+('5', 'test', 'test', 'test', true, current_date - 1);
+
+insert into expected_juror_pool (pool_number, juror_number, owner, status) values 
+('1', '1', '415', '1'),
+('1', '2', '415', '2'),
+('1', '3', '415', '1'),
+('1', '4', '400', '3'),
+('1', '5', '415', '2');
+
+
+-- inserting the test data
+insert into juror_mod.pool (pool_no, return_date, "owner", loc_code, total_no_required) values ('1', current_date, '400', '415', '10');
+
+insert into juror_mod.juror (juror_number, last_name, first_name, address_line_1, responded, bureau_transfer_date) values 
+('1', 'test', 'test', 'test', true, null),
+('2', 'test', 'test', 'test', true, null),
+('3', 'test', 'test', 'test', true, null),
+('4', 'test', 'test', 'test', true, null),
+('5', 'test', 'test', 'test', true, current_date - 1);
+
+insert into juror_mod.juror_pool (pool_number, juror_number, owner, status) values 
+('1', '1', '400', '1'),
+('1', '2', '400', '2'),
+('1', '3', '400', '11'),
+('1', '4', '400', '3'),
+('1', '5', '415', '2');
+
+
+-- execute the transfer pool details stored procedure
+call juror_mod.transfer_pool_details();
+
+-- testing that rows match the expected rows in the temp table
+select case when count(*) 
+	 = 0 then 'PASS' else 'FAIL' end as "Pool validation"
+from (
+	select pool_no, return_date, "owner", loc_code, total_no_required from juror_mod.pool except select pool_no, return_date, "owner", loc_code, total_no_required from expected_pool
+);
+
+select case when count(*) 
+	 = 0 then 'PASS' else 'FAIL' end as "Juror validation"
+from (
+	select juror_number, last_name, first_name, address_line_1, responded, bureau_transfer_date from juror_mod.juror 
+	except 
+	select juror_number, last_name, first_name, address_line_1, responded, bureau_transfer_date from expected_juror
+);
+
+select case when count(*) 
+	 = 0 then 'PASS' else 'FAIL' end as "Juror Pool validation"
+from (
+	select pool_number, juror_number, owner, status from juror_mod.juror_pool except select pool_number, juror_number, owner, status from expected_juror_pool
+);
+
+-- delete the temp tables
+drop table expected_juror_pool;
+drop table expected_juror;
+drop table expected_pool;
