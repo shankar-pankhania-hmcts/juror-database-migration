@@ -10,18 +10,12 @@ ALTER TABLE juror_mod.appearance_audit
 ALTER TABLE juror_mod.appearance_audit
 	DROP CONSTRAINT IF EXISTS fk_f_audit;
 
-
 /*
  * migrate part_expenses
  */
 WITH rows
 AS
 (
-	INSERT INTO juror_mod.appearance_audit(revision,rev_type,attendance_date,juror_number,loc_code,time_in,time_out,trial_number,non_attendance,no_show,mileage_due,mileage_paid,
-		misc_description,pay_cash,last_updated_by,created_by,public_transport_total_due,public_transport_total_paid,hired_vehicle_total_due,hired_vehicle_total_paid,
-		motorcycle_total_due,motorcycle_total_paid,car_total_due,car_total_paid,pedal_cycle_total_due,pedal_cycle_total_paid,childcare_total_due,childcare_total_paid,
-		parking_total_due,parking_total_paid,misc_total_due,misc_total_paid,smart_card_due,smart_card_paid,travel_time,payment_approved_date,expense_submitted_date,
-		is_draft_expense,f_audit,sat_on_jury,pool_number,appearance_stage,loss_of_earnings_due,loss_of_earnings_paid,subsistence_due,subsistence_paid,attendance_type)
 	SELECT DISTINCT
 		 	NEXTVAL('public.rev_info_seq') as revision,
 	 		CASE 
@@ -35,7 +29,7 @@ AS
 			a.timein as time_in,
 			a.timeout as time_out,
 			CASE 
-				WHEN EXISTS(SELECT 1 FROM juror_mod.trial t WHERE t.trial_number = a.pool_trial_no)
+				WHEN EXISTS(SELECT 1 FROM juror.trial t WHERE t.trial_no = a.pool_trial_no)
 					THEN a.pool_trial_no
 					ELSE NULL
 			END AS trial_number,
@@ -49,18 +43,6 @@ AS
 					THEN true
 					ELSE false
 			END AS no_show,
-			CASE pe.number_atts
-				WHEN 1 
-					THEN pe.total_mileage
-				WHEN 2
-					THEN NULL
-			END AS mileage_due,
-			CASE pe.number_atts
-				WHEN 1 
-					THEN NULL
-				WHEN 2
-					THEN pe.total_mileage
-			END AS mileage_paid,
 			pe.misc_description,
 			CASE UPPER(pe.pay_cash)
 				WHEN 'Y'
@@ -177,9 +159,7 @@ AS
 				WHEN 2
 					THEN pe.amt_spent
 			END AS smart_card_paid,
-			pe.travel_time,
-			pe.date_aramis_created as payment_approved_date,
-			pe.exp_subs_date as expense_submitted_date,
+			pe.travel_time*'1 hour'::INTERVAL as travel_time,
 			CASE UPPER(pe.pay_accepted)
 				WHEN 'Y'
 					THEN false
@@ -249,16 +229,76 @@ AS
 				WHEN UPPER(pe.non_attendance) = 'Y'
 					THEN 'NON_ATTENDANCE'
 					ELSE 'ABSENT'
-			END AS attendance_type
+			END AS attendance_type,
+			CASE
+				WHEN pe.rate_mcars = cl.loc_rate_mcars
+					THEN 0
+				WHEN pe.rate_mcars = cl.loc_rate_mcars_2
+					THEN 1
+				WHEN pe.rate_mcars = cl.loc_rate_mcars_3
+					THEN 2
+			END AS travel_jurors_taken_by_car,
+			CASE 
+				WHEN pe.mcars_total > 0
+					THEN true
+			END AS travel_by_car,
+			CASE
+				WHEN pe.rate_mcycles = cl.loc_rate_mcycles
+					THEN 0
+				WHEN pe.rate_mcycles = cl.loc_rate_mcycles_2
+					THEN 1
+			END AS travel_jurors_taken_by_motorcycle,
+			CASE 
+				WHEN pe.mcycles_total > 0 
+					THEN true
+			END AS travel_by_motorcycle,
+			CASE 
+				WHEN pe.pcycles_total > 0 
+					THEN true
+			END AS travel_by_bicycle,
+			pe.mileage AS miles_traveled,
+			CASE 
+				WHEN COALESCE(pe.subs_lfive_total,pe.subs_mfive_total,pe.loss_oten_total,pe.loss_overnight_total,0) = 0
+					THEN 'NONE'
+				WHEN COALESCE(pe.subs_lfive_total,0) > 0
+					THEN 'LESS_THAN_OR_EQUAL_TO_10_HOURS'
+				WHEN COALESCE(pe.subs_mfive_total,pe.loss_overnight_total,pe.loss_oten_total,0) > 0 
+					THEN 'MORE_THAN_10_HOURS'
+			END AS food_and_drink_claim_type
 	FROM juror.part_expenses pe
 	JOIN juror.appearances a
 	ON pe.part_no = a.part_no
 	AND pe.owner = a.owner
 	AND pe.att_date = a.att_date
-
-	RETURNING 1
+	JOIN juror.court_location cl
+	ON a.loc_code = cl.loc_code
+),
+rev_info -- are there any issues with all revisions having the same timestamp?
+AS 
+(
+	INSERT INTO juror_mod.rev_info(revision_number,revision_timestamp)
+	SELECT revision, cast(extract(epoch from current_timestamp) as integer) 
+	FROM rows 
 )
-SELECT COUNT(*) FROM rows;
+INSERT INTO juror_mod.appearance_audit(revision,rev_type,attendance_date,juror_number,loc_code,time_in,time_out,trial_number,non_attendance,no_show,
+		misc_description,pay_cash,last_updated_by,created_by,public_transport_total_due,public_transport_total_paid,hired_vehicle_total_due,hired_vehicle_total_paid,
+		motorcycle_total_due,motorcycle_total_paid,car_total_due,car_total_paid,pedal_cycle_total_due,pedal_cycle_total_paid,childcare_total_due,childcare_total_paid,
+		parking_total_due,parking_total_paid,misc_total_due,misc_total_paid,smart_card_due,smart_card_paid,travel_time,
+		is_draft_expense,f_audit,sat_on_jury,pool_number,appearance_stage,loss_of_earnings_due,loss_of_earnings_paid,subsistence_due,subsistence_paid,attendance_type,
+		travel_jurors_taken_by_car,travel_by_car,travel_jurors_taken_by_motorcycle,travel_by_motorcycle,travel_by_bicycle,miles_traveled,food_and_drink_claim_type)
+SELECT  revision,rev_type,attendance_date,juror_number,loc_code,time_in,time_out,trial_number,non_attendance,no_show,
+		misc_description,pay_cash,last_updated_by,created_by,public_transport_total_due,public_transport_total_paid,hired_vehicle_total_due,hired_vehicle_total_paid,
+		motorcycle_total_due,motorcycle_total_paid,car_total_due,car_total_paid,pedal_cycle_total_due,pedal_cycle_total_paid,childcare_total_due,childcare_total_paid,
+		parking_total_due,parking_total_paid,misc_total_due,misc_total_paid,smart_card_due,smart_card_paid,travel_time,
+		is_draft_expense,f_audit,sat_on_jury,pool_number,appearance_stage,loss_of_earnings_due,loss_of_earnings_paid,subsistence_due,subsistence_paid,attendance_type,
+		travel_jurors_taken_by_car,travel_by_car,travel_jurors_taken_by_motorcycle,travel_by_motorcycle,travel_by_bicycle,miles_traveled,food_and_drink_claim_type
+FROM rows;
+
+ALTER TABLE juror_mod.appearance_audit
+	ADD CONSTRAINT fk_revision_number FOREIGN KEY (revision) REFERENCES juror_mod.rev_info(revision_number);
+-- is the script for populating financial_audit_details missing?
+ALTER TABLE juror_mod.appearance_audit 
+	ADD CONSTRAINT fk_f_audit FOREIGN KEY (f_audit) REFERENCES juror_mod.financial_audit_details(id) NOT VALID;
 
 /* 
  * verify results
@@ -266,5 +306,5 @@ SELECT COUNT(*) FROM rows;
 select count(*) from juror.part_expenses;
 select max(revision) FROM juror_mod.appearance_audit;
 select last_value from rev_info_seq;
-
+select ri.*, aa.revision, aa.rev_type from juror_mod.rev_info ri join juror_mod.appearance_audit aa on ri.revision_number = aa.revision limit 10;
 select * from juror_mod.appearance_audit a limit 10;

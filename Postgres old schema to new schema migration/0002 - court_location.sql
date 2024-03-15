@@ -41,7 +41,7 @@ alter table juror_mod.utilisation_stats drop constraint if exists utilisation_st
 truncate table juror_mod.court_location;
 
 with target as (
-	insert into juror_mod.court_location("owner",loc_code,loc_name,loc_court_name,loc_attend_time,loc_address1,loc_address2,loc_address3,loc_address4,loc_address5,loc_address6,loc_zip,loc_phone,jury_officer_phone,location_address,region_id,yield,voters_lock,term_of_service,tdd_phone,loc_signature,rate_per_mile_car_0_passengers,rate_per_mile_car_1_passengers,rate_per_mile_car_2_or_more_passengers,rate_per_mile_motorcycle_0_passengers,rate_per_mile_motorcycle_1_or_more_passengers,rate_per_mile_bike,limit_financial_loss_half_day,limit_financial_loss_full_day,limit_financial_loss_half_day_long_trial,limit_financial_loss_full_day_long_trial,public_transport_soft_limit,rate_substance_standard,rate_substance_long_day,rates_effective_from)
+	insert into juror_mod.court_location("owner",loc_code,loc_name,loc_court_name,loc_attend_time,loc_address1,loc_address2,loc_address3,loc_address4,loc_address5,loc_address6,loc_zip,loc_phone,jury_officer_phone,location_address,region_id,yield,voters_lock,term_of_service,tdd_phone,loc_signature,rate_per_mile_car_0_passengers,rate_per_mile_car_1_passengers,rate_per_mile_car_2_or_more_passengers,rate_per_mile_motorcycle_0_passengers,rate_per_mile_motorcycle_1_or_more_passengers,rate_per_mile_bike,limit_financial_loss_half_day,limit_financial_loss_full_day,limit_financial_loss_half_day_long_trial,limit_financial_loss_full_day_long_trial,public_transport_soft_limit,rate_substance_standard,rate_substance_long_day,rates_effective_from,cost_centre)
 	select 	cl."owner",
 			cl.loc_code,
 			cl.loc_name,
@@ -76,7 +76,8 @@ with target as (
 			coalesce(cl.loc_rail_bus,cl.loc_rail_bus_alt) as public_transport_soft_limit,
 			cl.loc_subs_lfive_alt as rate_substance_standard,
 			cl.loc_subs_mfive_alt as rate_substance_long_day,
-			cl.loc_rate_transition as rates_effective_from
+			cl.loc_rate_transition as rates_effective_from,
+			cl.loc_cost_centre as cost_centre
 	from juror.court_location cl
 	returning 1
 )
