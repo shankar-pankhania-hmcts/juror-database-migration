@@ -44,7 +44,9 @@ as
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(*) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0008';
 
 alter table juror_mod.trial add constraint trial_courtroom_fk foreign key (courtroom) references juror_mod.courtroom(id) not valid;
@@ -53,7 +55,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0008';
 end $$;
 

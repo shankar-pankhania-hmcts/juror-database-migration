@@ -113,7 +113,9 @@ group by	ph.part_no,
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0017';
 
 create index i_juror_no on juror_mod.juror_pool using btree (juror_number);
@@ -124,7 +126,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0017';
 
 end $$;

@@ -77,14 +77,18 @@ with target as
 
 update	juror_mod.migration_log
 set		actual_target_count = (select count(*) from target),
-		"status" = 'complete'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0006';
 
 exception
 	when others then
 		update	juror_mod.migration_log
-		set		"status" = 'error',
-				actual_target_count = 0
+		set		"status" = 'ERROR',
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0006';
 
 

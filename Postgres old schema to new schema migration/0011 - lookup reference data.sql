@@ -55,7 +55,9 @@ as
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0011a';
 
 alter table juror_mod.contact_log
@@ -65,7 +67,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0011a';
 end $$;
 
@@ -103,7 +107,9 @@ as
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0011b';
 
 
@@ -114,7 +120,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0011b';
 end $$;
 
@@ -152,7 +160,9 @@ with target as (
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0011c';
 
 
@@ -167,7 +177,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0011c';
 end $$;
 
@@ -203,7 +215,9 @@ with target as (
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0011d';
 
 
@@ -215,7 +229,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0011d';
 end $$;
 
@@ -252,7 +268,9 @@ with target as (
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0011e';
 
 
@@ -264,7 +282,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0011e';
 end $$;
 
@@ -303,7 +323,9 @@ with target as (
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0011f';
 
 
@@ -318,7 +340,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0011f';
 end $$;
 
@@ -356,7 +380,9 @@ with target as (
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0011g';
 
 
@@ -371,7 +397,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0011g';
 end $$;
 
@@ -406,7 +434,9 @@ with target as (
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0011h';
 
 
@@ -418,7 +448,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0011h';
 end $$;
 
@@ -454,7 +486,9 @@ with target as (
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0011i';
 
 
@@ -466,7 +500,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0011i';
 end $$;
 
@@ -505,7 +541,9 @@ with target as (
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0011j';
 
 
@@ -517,7 +555,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0011j';
 end $$;
 
@@ -553,7 +593,9 @@ with target as (
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0011k';
 
 
@@ -564,7 +606,9 @@ exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0011k';
 end $$;
 

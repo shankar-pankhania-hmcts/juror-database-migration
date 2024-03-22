@@ -47,14 +47,18 @@ as
 
 update	juror_mod.migration_log
 set		actual_target_count = (select COUNT(1) from target),
-		"status" = 'COMPLETE'
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
 where 	script_number = '0013';
 
 exception
 	when others then
 		update	juror_mod.migration_log
 		set		"status" = 'ERROR',
-				actual_target_count = 0
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
 		where 	script_number = '0013';
 end $$;
 

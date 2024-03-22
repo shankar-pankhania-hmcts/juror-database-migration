@@ -22,5 +22,7 @@ create table juror_mod.migration_log (
 	source_count int,
 	expected_target_count int,
 	actual_target_count int,
-	date_executed timestamp not null default now()
+	start_time timestamp not null default now(),
+	end_time timestamp null,
+	execution_time interval hour to second null
 );
