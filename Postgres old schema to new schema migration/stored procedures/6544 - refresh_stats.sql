@@ -6,12 +6,14 @@ $$
 declare 
 begin
   call juror_mod.auto_processed();
-  call juror_mod.response_times_and_non_respond (no_of_months);
+  call juror_mod.response_times_and_not_responded(no_of_months);
   call juror_mod.unprocessed_responses();
   call juror_mod.welsh_online_responses(no_of_months);
   call juror_mod.thirdparty_online(no_of_months);
   call juror_mod.excusals(no_of_months);
   call juror_mod.deferrals(no_of_months);
+  
+
 end;
 $$;
 
@@ -43,10 +45,7 @@ l_Job_Type := 'refresh_stats_data.auto_processed';
       and r.reply_type = 'Digital'
       group by r.staff_assignment_date);
 
-    commit;
-
   	exception when others then
-
         get stacked diagnostics v_text_var1 = message_text,
                                 v_text_var2 = pg_exception_detail,
                                 v_text_var3 = pg_exception_hint;
@@ -63,7 +62,7 @@ $$;
 -- It is recommended to use use no_of_months = 6
 --    * It needs to be at least 3 given jurors are summoned 9 weeks in advance of their atttendance date
 --    * Using 6 allows some contingency in case it is decided to summon jurors earlier
-create or replace procedure juror_mod.response_times_and_non_responded(no_of_months int)
+create or replace procedure juror_mod.response_times_and_not_responded(no_of_months int)
 language plpgsql
 as
 $$
@@ -73,12 +72,11 @@ declare
    	v_text_var3 TEXT;
 	  l_Job_Type	varchar(50); 
 begin
-    l_Job_Type := 'refresh_stats_data.response_times_and_non_respond';
+    l_Job_Type := 'refresh_stats_data.response_times_and_not_respond';
 
     call juror_mod.not_responded (no_of_months);
     call juror_mod.response_times (no_of_months);
     
-    commit;
   	exception when others then
     get stacked diagnostics v_text_var1 = message_text,
                             v_text_var2 = pg_exception_detail,
@@ -101,23 +99,26 @@ declare
 begin
     l_Job_Type := 'refresh_stats_data.unprocessed_responses';
      -- delete then insert
-   delete from juror_mod.stats_unprocessed_responses; -- not using truncate table as we want to commit after the insert
-   insert into juror_mod.stats_unprocessed_responses
-   (select jp.loc_code, count(1)
-    from juror_mod.juror_pool jp, juror_mod.juror_response r
-    where p.is_active = 'Y'
-    and r.juror_number = jp.juror_number
-    and r.processing_status = 'TODO'
-    and r.reply_type = 'Digital'
-    group by jp.loc_code);
+    delete from juror_mod.stats_unprocessed_responses; -- not using truncate table as we want to commit after the insert
+    insert into juror_mod.stats_unprocessed_responses
+    (select p.loc_code, count(1)
+      from juror_mod.juror_pool jp
+      join pool p 
+      on p.pool_no = jp.pool_number
+      join juror_response r
+      on r.juror_number = jp.juror_number
+      where jp.is_active = 'Y'
+      and r.juror_number = jp.juror_number
+      and r.processing_status = 'TODO'
+      and r.reply_type = 'Digital'
+      group by p.loc_code);
 
-    commit;
-  	exception when others then
-    get stacked diagnostics v_text_var1 = message_text,
-                            v_text_var2 = pg_exception_detail,
-                            v_text_var3 = pg_exception_hint;
-    raise notice '%', 'unprocessed responses failed - error:->' || v_text_var1 || '|' || v_text_var2 || '|' || v_text_var3;
-    rollback;
+      exception when others then
+        get stacked diagnostics v_text_var1 = message_text,
+                              v_text_var2 = pg_exception_detail,
+                              v_text_var3 = pg_exception_hint;
+        raise notice '%', 'unprocessed responses failed - error:->' || v_text_var1 || '|' || v_text_var2 || '|' || v_text_var3;
+        rollback;
 end;
 $$;
 
@@ -137,24 +138,25 @@ declare
 begin
     l_job_type := 'refresh_stats_data.welsh_online_responses';
     
-    MERGE INTO JUROR_MOD.STATS_WELSH_ONLINE_RESPONSES t
+    MERGE INTO juror_mod.stats_welsh_online_responses t
     using (
-        select date_trunc('MONTH', h1.date_created) summons_month, count(1) welsh_response_count
-        from juror_mod.juror_response r, juror_mod.juror_history h1
+        select date_trunc('MONTH', h1.date_created) summons_month,
+        count(1) welsh_response_count
+        from juror_mod.juror_response r
+        join juror_mod.juror_history h1
+        on h1.juror_number = r.juror_number
         where h1.juror_number = r.juror_number
         and h1.history_code = 'RSUM'
         and h1.date_created > current_date - (no_of_months || ' MONTH')::interval -- exclude jurors summoned more than n months ago
-        and r.welsh is TRUE
+        and r.welsh = true
         and r.reply_type = 'Digital'
         group by date_trunc('MONTH', h1.date_created)) m
     ON ( t.summons_month = m.summons_month)
       WHEN MATCHED THEN
-           UPDATE SET t.welsh_response_count = m.welsh_response_count
+           UPDATE SET welsh_response_count = m.welsh_response_count
       WHEN NOT MATCHED then
-           INSERT (t.summons_month,t.welsh_response_count)
-           VALUES (m.summons_month,m.welsh_response_count);
+           insert values (m.summons_month,m.welsh_response_count);
     
-    commit;
   	exception when others then
     get stacked diagnostics v_text_var1 = message_text,
                             v_text_var2 = pg_exception_detail,
@@ -180,24 +182,23 @@ declare
 begin
     l_job_type := 'refresh_stats_data.thirdparty_online';
     
-    MERGE INTO JUROR_MOD.STATS_THIRDPARTY_ONLINE t
+    MERGE INTO juror_mod.stats_thirdparty_online t
     using (
-        select trunc(h1.date_created,'MONTH') summons_month, count(1) thirdparty_response_count
-        from juror_mod.juror_response r, juror_mod.juror_history h1
-        where h1.juror_number = r.juror_number
-        and h1.history_code = 'RSUM'
+        select date_trunc('MONTH', h1.date_created) summons_month, count(1) thirdparty_response_count
+        from juror_mod.juror_response r
+        join juror_mod.juror_history h1
+        on h1.juror_number = r.juror_number
+        where h1.history_code = 'RSUM'
         and h1.date_created > current_date - (no_of_months || ' MONTH')::interval  -- exclude jurors summoned more than n months ago
         and r.relationship is not null
         and r.reply_type = 'Digital'
         group by date_trunc('MONTH', h1.date_created)) m
     ON ( t.summons_month = m.summons_month)
       WHEN MATCHED THEN
-           UPDATE SET t.thirdparty_response_count = m.thirdparty_response_count
+           UPDATE SET thirdparty_response_count = m.thirdparty_response_count
       WHEN NOT MATCHED then
-           INSERT (t.summons_month,t.thirdparty_response_count)
-           VALUES (m.summons_month,m.thirdparty_response_count);
-    
-    commit;
+           INSERT VALUES (m.summons_month,m.thirdparty_response_count);
+
   	exception when others then
       get stacked diagnostics v_text_var1 = message_text,
                             v_text_var2 = pg_exception_detail,
@@ -238,20 +239,16 @@ declare
 begin
     l_Job_Type := 'refresh_stats_data.not_responded';
 
-   delete from JUROR_MOD.STATS_NOT_RESPONDED where summons_month >= date_trunc('MONTH', (current_date - no_of_months || ' months'::interval));
+   delete from juror_mod.stats_not_responded where summons_month >= date_trunc('MONTH', current_date - (no_of_months || ' MONTH')::interval);
 
-   INSERT INTO JUROR_MOD.STATS_NOT_RESPONDED(
+   INSERT INTO juror_mod.stats_not_responded(
     select date_trunc('MONTH', s.summons_date) summons_month,
        s.loc_code,
        count(1) Non_Responded_Count
        from (
-            select substr(h1.pool_number,1,3) loc_code,  -- JDB-5346 see comments above
+            select substr(h1.pool_number,1,3) "loc_code",  -- JDB-5346 see comments above
             jp.juror_number,
-            case 
-              when r.juror_number is null then 'Paper'
-              when r.reply_type = 'Digital' then 'Online'
-              else 'Paper'
-            end "Method",
+            r.reply_type,
             r.date_received response_date, -- digital plus paper responses but the latter is only those receieved post Juror Modernisation go_live
             min(h1.date_created) summons_date,
             min(h2.date_created) processed_date
@@ -260,7 +257,7 @@ begin
             on jp.juror_number = j.juror_number
             join juror_mod.juror_history h1
             on h1.juror_number = j.juror_number
-            and h1.history_code = "RSUM"
+            and h1.history_code = 'RSUM'
             full outer join juror_mod.juror_history h2
             on h2.juror_number = jp.juror_number
             and h2.history_code <> 'RSUM' -- ignore summons
@@ -270,34 +267,21 @@ begin
             and h2.history_code <> 'RSUP' -- JDB-5374 : ignore summons reprinted
             full outer join juror_mod.juror_response r
             on r.juror_number = j.juror_number
-            where jp.pool_number in (select p.pool_number from juror_mod.pool p where p.return_date >= current_date - (no_of_months || ' MONTH')::interval)
+            where jp.pool_number in (select p.pool_no from juror_mod.pool p where p.return_date >= current_date - (no_of_months || ' MONTH')::interval)
             and jp.is_active = 'Y' -- JDB-5346 see comments above
-            and j.juror_number = jp.juror_number
             and (j.summons_file is null or j.summons_file <> 'Disq. on selection')
-            and h1.juror_number = jp.juror_number
             and h1.date_created > current_date - (no_of_months || ' MONTH')::interval  -- exclude jurors summoned more than n months ago
-            and r.juror_number = jp.juror_number
+            and coalesce(r.date_received, h2.date_created) is null -- exclude responded jurors
             group by substr(h1.pool_number,1,3), jp.juror_number,
-            case 
-              when r.juror_number is null then 'Paper'
-              when r.reply_type = 'Digital' then 'Online'
-              else 'Paper'
-            end,
+            r.reply_type,
             r.date_received
             order by jp.juror_number
-            ) 
-       where coalesce(response_date, processed_date) is null -- exclude responded jurors
-       group by date_trunc('MONTH', s.summons_date), 
-       case 
-              when r.juror_number is null then 'Paper'
-              when r.reply_type = 'Digital' then 'Online'
-              else 'Paper'
-            end,
-       abs(coalesce(response_date, processed_date) - summons_date),
-       s.loc_code, s.method
+            ) s
+       where coalesce(response_date, processed_date) is null
+       group by-- exclude responded jurors
+       summons_month, s.loc_code
        );
     
-    commit;
   	exception when others then
     get stacked diagnostics v_text_var1 = message_text,
                             v_text_var2 = pg_exception_detail,
@@ -325,15 +309,15 @@ declare
 begin
     l_job_type := 'refresh_stats_data.stats_response_times';
     
-    MERGE INTO JUROR_MOD.STATS_RESPONSE_TIMES t
+    MERGE INTO juror_mod.stats_response_times t
   using (
        select date_trunc('MONTH', s.summons_date) summons_month,
        date_trunc('MONTH', coalesce(response_date, processed_date)) response_month, 
-    	 case when abs(coalesce(response_date, processed_date) - summons_date) < 8 then 'Within 7 days'
-    		    when abs(coalesce(response_date, processed_date) - summons_date) < 15 then 'Within 14 days'
-    		    when abs(coalesce(response_date, processed_date) - summons_date) < 22 then 'Within 21 days'
+    	 case when abs(coalesce(response_date::date, processed_date::date) - summons_date::date) < 8 then 'Within 7 days'
+    		    when abs(coalesce(response_date::date, processed_date::date) - summons_date::date) < 15 then 'Within 14 days'
+    		    when abs(coalesce(response_date::date, processed_date::date) - summons_date::date) < 22 then 'Within 21 days'
     		    else 'Over 21 days'
-    	 end "caseResponse_Period",
+    	 end response_period,
        s.loc_code,
        s.method Response_Method,
        count(1) Response_Count
@@ -344,7 +328,7 @@ begin
               when r.juror_number is null then 'Paper'
               when r.reply_type = 'Digital' then 'Online'
               else 'Paper'
-            end "Method",
+            end method,
             r.date_received response_date, -- digital plus paper responses but the latter is only those receieved post Juror Modernisation go_live
             min(h1.date_created) summons_date,
             min(h2.date_created) processed_date
@@ -364,7 +348,7 @@ begin
             and h2.user_id <> 'SYSTEM' -- filter out system generated excusals for covid19
             full outer join juror_mod.juror_response r
             on r.juror_number = jp.juror_number
-            where jp.pool_number in (select p.pool_number from juror_mod.pool p where p.return_date >= current_date - (no_of_months || ' MONTH')::interval)
+            where jp.pool_number in (select p.pool_no from juror_mod.pool p where p.return_date >= current_date - (no_of_months || ' MONTH')::interval)
             and jp.is_active = 'Y' -- JDB-5346 see comments above
             and (j.summons_file is null or j.summons_file <> 'Disq. on selection')
             and h1.date_created > current_date - (no_of_months || ' MONTH')::interval -- exclude jurors summoned more than n months ago
@@ -378,24 +362,23 @@ begin
             order by jp.juror_number
             ) s
        where coalesce(response_date, processed_date) is not null -- exclude non responded
-       group by trunc(s.summons_date,'MONTH'), 
+       group by date_trunc('MONTH', s.summons_date), 
        date_trunc('MONTH', coalesce(response_date, processed_date)),
-       case when abs(coalesce(response_date, processed_date) - summons_date) < 8 then 'Within 7 days'
-    		    when abs(coalesce(response_date, processed_date) - summons_date) < 15 then 'Within 14 days'
-    		    when abs(coalesce(response_date, processed_date) - summons_date) < 22 then 'Within 21 days'
+       case when abs(coalesce(response_date::date, processed_date::date) - summons_date::date) < 8 then 'Within 7 days'
+    		    when abs(coalesce(response_date::date, processed_date::date) - summons_date::date) < 15 then 'Within 14 days'
+    		    when abs(coalesce(response_date::date, processed_date::date) - summons_date::date) < 22 then 'Within 21 days'
     		    else 'Over 21 days'
     	 end,
        s.loc_code, s.method
         ) m
-  ON ( t.summons_month = m.summons_month and t.RESPONSE_MONTH = m.RESPONSE_MONTH and t.RESPONSE_PERIOD = m.RESPONSE_PERIOD
+  ON ( t.summons_month = m.summons_month and t.RESPONSE_MONTH = m.RESPONSE_MONTH 
+    and t.RESPONSE_PERIOD = m.RESPONSE_PERIOD
      and t.LOC_CODE = m.LOC_CODE and t.RESPONSE_METHOD = m.RESPONSE_METHOD)
       WHEN MATCHED THEN
-           UPDATE SET t.response_count = m.response_count
+           UPDATE SET response_count = m.response_count
       WHEN NOT MATCHED then
-           INSERT (t.SUMMONS_MONTH, t.RESPONSE_MONTH, t.RESPONSE_PERIOD, t.LOC_CODE, t.RESPONSE_METHOD, t.RESPONSE_COUNT)
-           VALUES (m.SUMMONS_MONTH, m.RESPONSE_MONTH, m.RESPONSE_PERIOD, m.LOC_CODE, m.RESPONSE_METHOD, m.RESPONSE_COUNT);
+           INSERT VALUES (m.SUMMONS_MONTH, m.RESPONSE_MONTH, m.RESPONSE_PERIOD, m.LOC_CODE, m.RESPONSE_METHOD, m.RESPONSE_COUNT);
     
-    commit;
   	exception when others then
     get stacked diagnostics v_text_var1 = message_text,
                             v_text_var2 = pg_exception_detail,
@@ -421,7 +404,7 @@ declare
 	l_Job_Type	varchar(50); 
 begin
     l_Job_Type := 'refresh_stats_data.deferrals';
-    delete from juror_mod.stats_deferrals sd where sd.week >= to_char(date_trunc('IW', current_date - no_of_months),'IYYY/IW');
+    delete from juror_mod.stats_deferrals sd where sd.week >= to_char(date_trunc('WEEK', current_date - no_of_months),'IYYY/IW');
 
     INSERT INTO juror_mod.stats_deferrals
 
@@ -430,7 +413,7 @@ begin
             case when jp.owner = '400' then 'Bureau'
             else 'Court'
             end "Bureau_or_Court",
-          coalesce(jp.deferral_code,'O'), -- default to O if null (allowing for inconsistent data in the pool table)
+          coalesce(jp.deferral_code,'O') exec_code, -- default to O if null (allowing for inconsistent data in the pool table)
           to_char(p.return_date,'IYYY') Calendar_Year,
           case when p.return_date < to_date('01-APR-'||to_char(p.return_date,'YYYY'),'DD-MON-YYYY') then (to_number(to_char(p.return_date,'YYYY'),'9999')-1)||'/'||to_char(p.return_date,'YY')
               else to_char(p.return_date,'YYYY')||'/'||(to_number(to_char(p.return_date,'YY'),'9999')+1) 
@@ -439,8 +422,8 @@ begin
           count(1)
           from juror_mod.juror_pool jp, juror_mod.pool p
           where jp.status = 7
-          and jp.pool_number = p.pool_number
-          and p.return_date >= date_trunc('IW',current_date - (no_of_months || ' MONTH')::interval) -- from the start of the week after deducting the no_of_months
+          and jp.pool_number = p.pool_no
+          and p.return_date >= date_trunc('WEEK',current_date - (no_of_months || ' MONTH')::interval) -- from the start of the week after deducting the no_of_months
           group by case when jp.owner = '400' then 'Bureau'
             else 'Court'
             end,
@@ -450,7 +433,6 @@ begin
               else to_char(p.return_date,'YYYY')||'/'||(to_number(to_char(p.return_date,'YY'),'9999')+1) end,
           to_char(p.return_date,'IYYY/IW'));
       
-    commit;
   	exception when others then
     get stacked diagnostics v_text_var1 = message_text,
                             v_text_var2 = pg_exception_detail,
@@ -461,10 +443,6 @@ end;
 $$;
 
 
-
-
-
-
 create or replace procedure juror_mod.excusals(no_of_months int)
 language plpgsql
 as
@@ -473,11 +451,11 @@ declare
     v_text_var1 TEXT;
    	v_text_var2 TEXT;
    	v_text_var3 TEXT;
-	l_Job_Type	varchar(50); 
+	  l_Job_Type	varchar(50); 
 begin
     l_Job_Type := 'refresh_stats_data.excusals';
 
-   delete from juror_mod.stats_excusals where week >= to_char(trunc(add_months(sysdate-1,- no_of_months),'IW'),'IYYY/IW');
+   delete from juror_mod.stats_excusals where week >= to_char(date_trunc('WEEK',current_date - (no_of_months || ' MONTH')::interval),'IYYY/IW');
           
    INSERT INTO juror_mod.stats_excusals
 
@@ -492,8 +470,8 @@ begin
         count(1)
         from juror_mod.juror_pool jp, juror_mod.pool p, juror_mod.juror j
         where jp.status = 5
-        and jp.pool_number = p.pool_number
-        and p.return_date >= date_trunc('IW',current_date - (no_of_months || ' MONTH')::interval) -- from the start of the week after deducting the no_of_months
+        and jp.pool_number = p.pool_no
+        and p.return_date >= date_trunc('WEEK',current_date - (no_of_months || ' MONTH')::interval) -- from the start of the week after deducting the no_of_months
         and jp.is_active = 'Y'
         and j.juror_number = jp.juror_number
         group by case when jp.owner = '400' then 'Bureau'
@@ -504,7 +482,7 @@ begin
         case when p.return_date < to_date('01-APR-'||to_char(p.return_date,'YYYY'),'DD-MON-YYYY') then (to_number(to_char(p.return_date,'YYYY'),'9999')-1)||'/'||to_char(p.return_date,'YY')
              else to_char(p.return_date,'YYYY')||'/'||(to_number(to_char(p.return_date,'YY'),'9999')+1) end,
         to_char(p.return_date,'IYYY/IW'));
-    commit;
+
   	exception when others then
     get stacked diagnostics v_text_var1 = message_text,
                             v_text_var2 = pg_exception_detail,
