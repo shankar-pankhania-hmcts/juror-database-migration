@@ -62,7 +62,7 @@ from	(
 								a.nr as addressline,
 								ltrim(a.elem) as address
 			from 				juror.part_amendments pa
-			join lateral 		unnest(string_to_array(pa.address,',')) with ordinality a(elem, nr) on true
+			join 				lateral	unnest(string_to_array(pa.address,',')) with ordinality a(elem, nr) on true
 			where 				coalesce(pa.address,'') <> ''
 	 	) a;
 
