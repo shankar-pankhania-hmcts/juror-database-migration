@@ -48,7 +48,7 @@ with target as (
 			jr.address2,
 			jr.address3,
 			jr.address4,
-			rtrim(jr.address5||' '||jr.address6) as address5,
+			jr.address5,
 			jr.zip,
 			jr.alt_phone_number,
 			case upper(jr.bail)
