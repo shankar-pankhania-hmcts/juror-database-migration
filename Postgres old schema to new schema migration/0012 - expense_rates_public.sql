@@ -1,19 +1,19 @@
 /*
- * +---------------+---------------+---------------+---------------+--------------+
- * | Script Number | Source Schema | Source Table  | Target Schema | Target Table |
- * +---------------+---------------+---------------+---------------+--------------+
- * |          0012 | juror_digital | expenses_rates| juror_mod     | expense_rate |
- * +---------------+---------------+---------------+---------------+--------------+
+ * +---------------+---------------+---------------+---------------+----------------------+
+ * | Script Number | Source Schema | Source Table  | Target Schema | Target Table         |
+ * +---------------+---------------+---------------+---------------+----------------------+
+ * |          0012 | juror_digital | expenses_rates| juror_mod     | expense_rates_public |
+ * +---------------+---------------+---------------+---------------+----------------------+
  * 
- * expense_rate
- * ------------
+ * expense_rates_public
+ * --------------------
  * 
  */
 
 delete from juror_mod.migration_log where script_number = '0012';
 
 insert into juror_mod.migration_log (script_number, source_schema, source_table, target_schema, target_table)
-values ('0012', 'juror_digital', 'expense_rates', 'juror_mod', 'expense_rate');
+values ('0012', 'juror_digital', 'expense_rates', 'juror_mod', 'expense_rates_public');
 
 
 update	juror_mod.migration_log
@@ -25,12 +25,10 @@ do $$
 
 begin
 
-truncate table juror_mod.expense_rate;
+truncate table juror_mod.expense_rates_public;
 
-with target
-as
-(
-	insert into juror_mod.expense_rate(expense_type, rate)
+with target as (
+	insert into juror_mod.expense_rates_public(expense_type, rate)
 	select distinct 
 			er.expense_type,
 			er.rate
@@ -39,7 +37,7 @@ as
 )
 
 update	juror_mod.migration_log
-set		actual_target_count = (select COUNT(1) from target),
+set		actual_target_count = (select count(1) from target),
 		"status" = 'COMPLETE',
 		end_time = now(),
 		execution_time = age(now(), migration_log.start_time)
@@ -56,4 +54,4 @@ exception
 end $$;
 
 select * from juror_mod.migration_log where script_number = '0012';
-select * from juror_mod.expense_rate limit 10;
+select * from juror_mod.expense_rates_public limit 10;
