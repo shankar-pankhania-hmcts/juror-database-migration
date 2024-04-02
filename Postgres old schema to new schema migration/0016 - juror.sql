@@ -53,6 +53,9 @@ alter table juror_mod.juror_history
 alter table juror_mod.juror
    drop constraint if exists police_check_val;
 
+alter table juror_mod.financial_audit_details_appearances
+   drop constraint if exists financial_audit_details_appearances_appearance_juror_fk;
+
 -- begin data migration
 
 truncate juror_mod.juror;
@@ -189,6 +192,9 @@ alter table juror_mod.juror
 	'ERROR_RETRY_NO_ERROR_REASON'::character varying, 
 	'ERROR_RETRY_UNEXPECTED_EXCEPTION'::character varying, 
 	'UNCHECKED_MAX_RETRIES_EXCEEDED'::character varying])::text[])));
+
+alter table juror_mod.financial_audit_details_appearances add constraint financial_audit_details_appearances_appearance_juror_fk
+	foreign key (juror_number) references juror_mod.juror(juror_number);
 
 -- rebuild indexes
 
