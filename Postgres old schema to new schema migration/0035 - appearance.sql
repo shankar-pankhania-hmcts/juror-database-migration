@@ -521,12 +521,369 @@ end $$;
 
 alter table juror_mod.appearance add constraint app_loc_code_fk 
 	foreign key (loc_code) references juror_mod.court_location(loc_code);
+
 alter table juror_mod.appearance add constraint appearance_juror_fk 
 	foreign key (juror_number) references juror_mod.juror(juror_number);
+
 alter table juror_mod.appearance add constraint appearance_pool_fk 
 	foreign key (pool_number) references juror_mod.pool(pool_no);
+
 alter table juror_mod.appearance add constraint appearance_trial_fk 
 	foreign key (trial_number, loc_code) references juror_mod.trial(trial_number, loc_code);
+
+
+-- audit_report -> appearance_audit
+
+insert into juror_mod.migration_log (script_number, source_schema, source_table, target_schema, target_table, start_time)
+values ('0035d', 'juror', 'audit_report', 'juror_mod', 'appearance_audit', now());
+
+update	juror_mod.migration_log
+set		source_count = (select count(1) from juror.audit_report),
+		expected_target_count = (	select 		count(1) 
+									from 		(	
+													select	part_no, loc_code, att_date
+													from	juror.audit_report
+													union	
+													select	juror_number, loc_code, attendance_date
+													from	juror_mod.appearance
+												)
+								)
+where 	script_number = '0035d';
+
+do $$
+
+begin
+
+/*
+ * report_type
+ * -----------
+ * 1 = pay attendance (i.e. initial expenses due)
+ * 2 = edit payment (i.e. new amounts after the edit - includes edits before any payments approved as well as edits after a payment has been approved)
+ * 3 = aramis payment (i.e. amounts approved for bacs/cheque payment)
+ * 4 = cash payment (i.e. amounts approved for cash payment)
+ * 5 = aramis repayment (i.e. amounts approved for bacs/cheque payment after edits to a  previously made payment)
+ */
+
+alter table juror_mod.appearance_audit
+	drop constraint if exists fk_revision_number;
+
+alter table juror_mod.appearance_audit
+	drop constraint if exists fk_f_audit;
+
+truncate table juror_mod.appearance_audit;  -- do not reset the revision seeding as other tables use rev_info!
+
+
+with target as (
+	select distinct
+		 	nextval('public.rev_info_seq') as revision,
+			case 
+				when afr.report_type = '1' 
+					then 0 -- first insert
+					else 1 -- update
+			end as rev_type,
+			ar.att_date as attendance_date,
+			ar.part_no as juror_number,
+			a.loc_code,  -- this is nullable in the source table so use parent row from appearance
+			ar.timein as time_in,
+			ar.timeout as time_out,
+			case 
+				when exists(select 1 from juror.trial t where t.trial_no = ar.pool_trial and t.owner = a.owner)
+					then ar.pool_trial
+					else null
+			end as trial_number,
+			case upper(ar.non_attendance)
+				when 'Y'
+					then true
+					else false
+			end as non_attendance,
+			false as no_show,
+			ar.misc_description,
+			case upper(ar.pay_cash)
+				when 'Y'
+					then true
+					else false
+			end as pay_cash,
+			ar.user_id as last_updated_by,
+			ar.user_id as created_by,
+			case 
+				when afr.report_type in ('1','2')
+					then ar.public_trans
+					else null
+			end as public_transport_total_due,
+			case
+				when afr.report_type in ('3','4','5')
+					then ar.public_trans
+					else null
+			end as public_transport_total_paid,
+			case
+				when afr.report_type in ('1','2')
+					then ar.hired_vehicle_total
+					else null
+			end as hired_vehicle_total_due,
+			case
+				when afr.report_type in ('3','4','5')
+					then ar.hired_vehicle_total
+					else null
+			end as hired_vehicle_total_paid,
+			case
+				when afr.report_type in ('1','2')
+					then ar.mcycles_total
+					else null
+			end as motorcycle_total_due,
+			case
+				when afr.report_type in ('3','4','5')
+					then ar.mcycles_total
+					else null
+			end as motorcycle_total_paid,
+			case
+				when afr.report_type in ('1','2')
+					then ar.mcars_total
+					else null
+			end as car_total_due,
+			case
+				when afr.report_type in ('3','4','5')
+					then ar.mcars_total
+					else null
+			end as car_total_paid,
+			case
+				when afr.report_type in ('1','2')
+					then ar.pcycles_total
+					else null
+			end as pedal_cycle_total_due,
+			case
+				when afr.report_type in ('3','4','5')
+					then ar.pcycles_total
+					else null
+			end as pedal_cycle_total_paid,
+			case
+				when afr.report_type in ('1','2')
+					then ar.child_care
+					else null
+			end as childcare_total_due,
+			case
+				when afr.report_type in ('3','4','5')
+					then ar.child_care
+					else null
+			end as childcare_total_paid,
+			case
+				when afr.report_type in ('1','2')
+					then ar.public_parking_total
+					else null
+			end as parking_total_due,
+			case
+				when afr.report_type in ('3','4','5')
+					then ar.public_parking_total
+					else null
+			end as parking_total_paid,
+			case
+				when afr.report_type in ('1','2')
+					then ar.misc_amount
+					else null
+			end as misc_total_due,
+			case
+				when afr.report_type in ('3','4','5')
+					then ar.misc_amount
+					else null
+			end as misc_total_paid,
+			case
+				when afr.report_type in ('1','2')
+					then ar.amt_spent
+					else null
+			end as smart_card_due,
+			case
+				when afr.report_type in ('3','4','5')
+					then ar.amt_spent
+					else null
+			end as smart_card_paid,
+			ar.travel_time*'1 hour'::interval as travel_time,
+			right(afr.faudit,length(afr.faudit)-1)::bigint as f_audit, -- remove the leading f character to leave just the digits
+			case 
+				when ar.court_emp = 'J'
+					then true
+					else false
+			end as sat_on_jury,
+			case 
+				when length(ar.pool_trial) = 9 and exists(select 1 from juror.unique_pool up where up.pool_no = ar.pool_trial)
+					then ar.pool_trial
+					else null
+			end as pool_number,
+			case ar.app_stage
+				when 1
+					then 'CHECKED_IN' 
+				when 2
+					then 'CHECKED_OUT' 
+				when 4
+					then 'EXPENSE_ENTERED' 
+				when 8
+					then 'EXPENSE_ENTERED' 
+				when 9
+					then 'EXPENSE_ENTERED' 
+				when 10
+					then 'EXPENSE_AUTHORISED' 
+				when 11
+					then 'EXPENSE_EDITED'
+					else null
+			end as appearance_stage,
+			case
+				when afr.report_type in ('1','2')
+					then coalesce(ar.los_lfour_total,ar.los_mfour_total,ar.loss_mten_total,ar.loss_oten_h_total)
+					else null
+			end as loss_of_earnings_due,
+			case
+				when afr.report_type in ('3','4','5')
+					then coalesce(ar.los_lfour_total,ar.los_mfour_total,ar.loss_mten_total,ar.loss_oten_h_total)
+					else null
+			end as loss_of_earnings_paid,
+			case
+				when afr.report_type in ('1','2')
+					then coalesce(ar.subs_lfive_total,ar.subs_mfive_total,ar.loss_oten_total,ar.loss_overnight_total)
+					else null
+			end as subsistence_due,
+			case
+				when afr.report_type in ('3','4','5')
+					then coalesce(ar.subs_lfive_total,ar.subs_mfive_total,ar.loss_oten_total,ar.loss_overnight_total)
+					else null
+			end as subsistence_paid,
+			case 
+				when coalesce(ar.los_mfour_total, ar.subs_mfive_total, ar.loss_overnight_total, 0) > 0
+					then 'FULL_DAY'
+				when coalesce(ar.los_lfour_total, ar.subs_lfive_total, 0) > 0
+					then 'HALF_DAY'
+				when coalesce(ar.loss_mten_total, 0) > 0
+					then 'FULL_DAY_LONG_TRIAL'
+				when coalesce(ar.loss_oten_h_total, 0) > 0
+					then 'HALF_DAY_LONG_TRIAL'
+				when upper(ar.non_attendance) = 'Y'
+					then 'NON_ATTENDANCE'
+					else null
+			end as attendance_type,
+			false as is_draft_expense,
+						case
+				when ar.rate_mcars = cl.loc_rate_mcars
+					then 0
+				when ar.rate_mcars = cl.loc_rate_mcars_2
+					then 1
+				when ar.rate_mcars = cl.loc_rate_mcars_3
+					then 2
+			end as travel_jurors_taken_by_car,
+			case 
+				when ar.mcars_total > 0 
+					then true
+			end as travel_by_car,
+			case
+				when ar.rate_mcycles = cl.loc_rate_mcycles
+					then 0
+				when ar.rate_mcycles = cl.loc_rate_mcycles_2
+					then 1
+			end as travel_jurors_taken_by_motorcycle,
+			case 
+				when ar.mcycles_total > 0 
+					then true
+			end as travel_by_motorcycle,
+			case 
+				when ar.pcycles_total > 0 
+					then true
+			end as travel_by_bicycle,
+			ar.mileage as miles_traveled,
+			case 
+				when coalesce(ar.subs_lfive_total,ar.subs_mfive_total,ar.loss_oten_total,ar.loss_overnight_total,0) = 0
+					then 'NONE'
+				when coalesce(ar.subs_lfive_total,0) > 0
+					then 'LESS_THAN_OR_EQUAL_TO_10_HOURS'
+				when coalesce(ar.subs_mfive_total,ar.loss_overnight_total,ar.loss_oten_total,0) > 0 
+					then 'MORE_THAN_10_HOURS'
+			end as food_and_drink_claim_type
+	from 	juror.audit_f_report afr
+	join 	juror.audit_report ar
+		on 	afr.part_no = ar.part_no
+			and afr.owner = ar.owner
+			and afr.line_no = ar.line_no
+			and afr.faudit = ar.audits
+	join 	juror.appearances a -- link to the new table to identify the loc_code
+		on 	ar.part_no = a.part_no
+			and ar.att_date = a.att_date
+			and ar.owner = a.owner
+			and coalesce(afr.loc_code,ar.loc_code) = a.loc_code
+	join 	juror.court_location cl
+		on	coalesce(afr.loc_code,ar.loc_code) = cl.loc_code
+),
+
+rev_info as (
+	insert into	juror_mod.rev_info(revision_number,revision_timestamp)
+	select 		revision, cast(extract(epoch from current_timestamp) as integer) 
+	from 		target 
+)
+
+insert into juror_mod.appearance_audit(revision,rev_type,attendance_date,juror_number,loc_code,time_in,time_out,trial_number,non_attendance,no_show,misc_description,pay_cash,last_updated_by,created_by,public_transport_total_due,public_transport_total_paid,hired_vehicle_total_due,hired_vehicle_total_paid,motorcycle_total_due,motorcycle_total_paid,car_total_due,car_total_paid,pedal_cycle_total_due,pedal_cycle_total_paid,childcare_total_due,childcare_total_paid,parking_total_due,parking_total_paid,misc_total_due,misc_total_paid,smart_card_due,smart_card_paid,travel_time,f_audit,sat_on_jury,pool_number,appearance_stage,loss_of_earnings_due,loss_of_earnings_paid,subsistence_due,subsistence_paid,attendance_type,is_draft_expense,travel_jurors_taken_by_car,travel_by_car,travel_jurors_taken_by_motorcycle,travel_by_motorcycle,travel_by_bicycle,miles_traveled,food_and_drink_claim_type)
+select 	revision,rev_type,attendance_date,juror_number,loc_code,time_in,time_out,trial_number,non_attendance,no_show,misc_description,pay_cash,last_updated_by,created_by,public_transport_total_due,public_transport_total_paid,hired_vehicle_total_due,hired_vehicle_total_paid,motorcycle_total_due,motorcycle_total_paid,car_total_due,car_total_paid,pedal_cycle_total_due,pedal_cycle_total_paid,childcare_total_due,childcare_total_paid,parking_total_due,parking_total_paid,misc_total_due,misc_total_paid,smart_card_due,smart_card_paid,travel_time,f_audit,sat_on_jury,pool_number,appearance_stage,loss_of_earnings_due,loss_of_earnings_paid,subsistence_due,subsistence_paid,attendance_type,is_draft_expense,travel_jurors_taken_by_car,travel_by_car,travel_jurors_taken_by_motorcycle,travel_by_motorcycle,travel_by_bicycle,miles_traveled,food_and_drink_claim_type
+from 	target;
+
+
+alter table juror_mod.appearance_audit
+	add constraint fk_revision_number foreign key (revision) references juror_mod.rev_info(revision_number);
+
+--alter table juror_mod.appearance_audit 
+--	add constraint fk_f_audit foreign key (f_audit) references juror_mod.financial_audit_details(id);
+
+update	juror_mod.migration_log
+set		actual_target_count = (select count(1) from juror_mod.appearance_audit),
+		"status" = 'COMPLETE',
+		end_time = now(),
+		execution_time = age(now(), migration_log.start_time)
+where 	script_number = '0035d';
+
+
+exception
+	when others then
+		update	juror_mod.migration_log
+		set		"status" = 'ERROR',
+				actual_target_count = 0,
+				end_time = now(),
+				execution_time = age(now(), migration_log.start_time)
+		where 	script_number = '0035d';
+
+end $$;
+
+--
+--/*
+-- * fta letters - for each no show record insert a basic entry into appearance
+-- */
+--with rows
+--as
+--(
+--	select distinct
+--		 	nextval('public.rev_info_seq') as revision,
+--			0 as rev_type,	-- -- first insert
+--			fl.date_fta as attendance_date,
+--			fl.part_no as juror_number,
+--			left(jp.pool_number,3) as loc_code,  -- this is nullable in the source table so use parent row from appearance
+--			true as no_show,
+--			jp.pool_number,
+--			'system' as created_by
+--	from juror.fta_lett fl 
+--	join juror_mod.juror_pool jp 
+--	on fl.part_no = jp.juror_number
+--	and fl.owner = jp.owner
+--	where fl.date_fta is not null
+--	and jp.is_active = true
+--	and not exists(select 1 from juror_mod.appearance_audit aa where aa.juror_number = fl.part_no and aa.attendance_date = fl.date_fta and aa.loc_code = left(jp.pool_number,3))
+--),
+--
+--rev_info as  (
+--	insert into juror_mod.rev_info(revision_number,revision_timestamp)
+--	select revision, cast(extract(epoch from current_timestamp) as integer) 
+--	from target
+--)
+--
+--insert into juror_mod.appearance_audit(revision,rev_type,attendance_date,juror_number,loc_code,no_show,pool_number,created_by)
+--select 	revision,rev_type,attendance_date,juror_number,loc_code,no_show,pool_number,created_by
+--from 	target;
+
+
+
+
+
+
 
 
 
@@ -536,3 +893,7 @@ select * from juror_mod.appearance limit 10;
 select * from juror_mod.appearance_audit limit 10;
 select * from juror_mod.financial_audit_details limit 10;
 select * from juror_mod.financial_audit_details_appearances limit 10;
+
+-- verify sequence
+select max(revision) from juror_mod.appearance_audit;
+select last_value from rev_info_seq;
