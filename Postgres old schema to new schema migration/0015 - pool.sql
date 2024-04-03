@@ -99,8 +99,8 @@ do $$
 
 begin
 
-insert into juror_mod.migration_log (script_number, source_schema, source_table, target_schema, target_table)
-values ('0015b', 'juror', 'unique_pool', 'juror_mod', 'pool (nil_pool)');
+insert into juror_mod.migration_log (script_number, source_schema, source_table, target_schema, target_table, start_time)
+values ('0015b', 'juror', 'unique_pool', 'juror_mod', 'pool (nil_pool)', now());
 
 
 with nil_pools as (
