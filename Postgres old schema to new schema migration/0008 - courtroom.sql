@@ -45,6 +45,7 @@ with target as (
 			l.description
 	from 	juror."location" l
 	where 	l."owner" <> '400'
+			and l."location" not in ('Asmbly', 'ChkOut', 'Navail')
 	returning 1
 )
 
