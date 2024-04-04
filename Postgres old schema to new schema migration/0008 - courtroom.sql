@@ -18,7 +18,7 @@ values ('0008', 'juror', 'location', 'juror_mod', 'courtroom');
 
 update	juror_mod.migration_log
 set		source_count = (select count(1) from juror."location"),
-		expected_target_count = (select count(1) from juror."location")
+		expected_target_count = (select count(1) from juror."location" where "owner" <> '400')
 where 	script_number = '0008';
 
 do $$
@@ -43,7 +43,8 @@ with target as (
 			l."owner",
 			l."location",
 			l.description
-	from juror."location" l
+	from 	juror."location" l
+	where 	l."owner" <> '400'
 	returning 1
 )
 
