@@ -1,3 +1,16 @@
+-- Purpose : Procedures for populating staging tables used by the Juror Digital performance dashboard
+-- Amended : 29/06/2020 Added THIRDPARTY_ONLINE procedure
+-- Amended : 20/07/2020 Defect fix for RESPONSE_TIMES procedure - Group By neeed the Case statament not just the Decode
+-- Amended : 27/10/2020 Defect fix for JDB-4621 Undeliverables counted as responded
+-- Amended : 05/07/2021 Added DEFERRALS and EXCUSALS procedures
+-- Amended : 05/08/2021 Defect fix for the Calendar Year calculation in the DEFERRALS and EXCUSALS procedures
+-- Amended : 26/10/2021 JDB-4968 Defect fix for the Calendar Year calculation and exc_code in the DEFERRALS and EXCUSALS procedures
+-- Amended : 14/12/2022 JDB-5310 Defect fix for missing DEFERRALS and EXCUSALS stats
+-- Amended : 27/02/2023 JDB-5346 Defect fix for jurors whose original pool has been deleted
+-- Amended : 02/03/2023 JDB-5349 The dashboard should ignore the pool reasignment history event 'PREA'
+-- Amended : 02/05/2023 JDB-5374 The dashboard should ignore the summons reprinted 'RSUP' events (LH)
+-- Amended : 13/03/2024 JM-6544 Refactor for Juror Modernisation changes to the data model
+
 -- entry point
 create or replace procedure juror_dashboard.refresh_stats_data(no_of_months int)
 language plpgsql as
@@ -5,6 +18,7 @@ language plpgsql as
 $$
 
 declare 
+
 
 begin
 
@@ -27,6 +41,10 @@ $$;
  * No insertion of rows for days that have no AUTO processed responses
  * 
  * Digital responses only.
+ * 
+ * It will automatically catch-up if it hasn't been run for one or more days.
+ * 
+ * To refresh existing rows, those rows would first need to be deleted from stats_auto_processed.
  */
 create or replace procedure juror_dashboard.auto_processed()
 language plpgsql as
@@ -46,16 +64,16 @@ begin
 
 	insert into juror_dashboard.stats_auto_processed (
 	
-		select		r.staff_assignment_date processed_date,
+		select		r.staff_assignment_date::date processed_date,
 					count(1) as "count"
 		from		juror_mod.juror_response r
 		where		r.staff_login = 'AUTO'
-					and r.staff_assignment_date > (	
+					and r.staff_assignment_date::date > (	
 						select	coalesce(max(processed_date), '01-JAN-1990')
 						from	juror_dashboard.stats_auto_processed)
-					and r.staff_assignment_date < current_date
+					and r.staff_assignment_date::date < current_date
 					and r.reply_type = 'Digital'
-		group by	r.staff_assignment_date
+		group by	r.staff_assignment_date::date
 	);
 
 exception
