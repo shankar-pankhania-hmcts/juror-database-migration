@@ -37,11 +37,12 @@ truncate table juror_mod.trial cascade; -- truncates appearance table as well
 
 drop table trial_loc;
 
-create temporary table if not exists trial_loc as (
+create temporary table if not exists trial_lookup as (
 	select distinct t.trial_no
 					,t."owner"
 					,u.loc_code
 					,u.pool_no
+					,h.part_no
 	from			juror.trial as t
 	inner join		juror.panel as p
 		on			t."owner" = p."owner" 
@@ -58,7 +59,19 @@ create temporary table if not exists trial_loc as (
 					and u.new_request = 'N'
 );
 
-with target as (
+/**
+ * Filter the temporary table to map unique trial_no and owner pairs with a respective court location code
+ * in up to 25 cases in production we can expecte a single trial number to be associated with multiple location codes
+ * all "duplicate" records will have the same owner value (location codes will be for courts under the same primary court group)
+ * creating multiple trials for each location reflects the behaviour of the new, modernised application so is not introducing an issue
+ */
+with trial_location as (
+	select distinct		trial_no,
+						"owner",
+						loc_code		
+	from				trial_lookup),
+
+target as (
 	insert into juror_mod.trial(trial_number,loc_code,description,courtroom,judge,trial_type,trial_start_date,trial_end_date,anonymous)
 	select distinct 
 				t.trial_no,
@@ -81,7 +94,7 @@ with target as (
 	inner join 	juror_mod.judge j 
 		on 		t.judge = j.code 
 				and t."owner" = j."owner"
-	left join 	trial_loc tl
+	left join 	trial_location tl
 		on 		t.trial_no = tl.trial_no
 				and t."owner" = tl."owner"
 	returning 1
@@ -150,9 +163,10 @@ with target as (
 						else false
 				end
 	from 		juror.panel p
-	left join 	trial_loc tl
+	left join 	trial_lookup tl
 		on 		p.trial_no = tl.trial_no
 				and p."owner" = tl."owner"
+				and p.part_no = tl.part_no
 	returning 1
 )
 
