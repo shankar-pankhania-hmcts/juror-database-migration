@@ -18,7 +18,7 @@ values ('0006', 'juror', 'holidays', 'juror_mod', 'holiday');
 
 do $$
 
-begin
+begin  
 
 
 -- build a list of public bank holiday for the next 2 years in order to set the flag true
@@ -57,8 +57,8 @@ truncate juror_mod.holiday restart identity cascade;
 
 with target as 
 (
-	insert into juror_mod.holiday(owner,holiday,description,public)	
-	select  null as owner, 
+	insert into juror_mod.holiday(loc_code,holiday,description,public)	
+	select  null as loc_code, 
 			tbh.bank_holiday, 
 			tbh.description,
 			true as public
