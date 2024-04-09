@@ -24,17 +24,24 @@ INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (7,
 INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (8, null, '2025/12/26', 'Boxing Day', true);
 
 
--- 4 additional non-working days
 INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (9, '415', '2024-04-04', 'Maintenance work', false);
 INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (10, '415', '2024-04-05', 'Maintenance work', false);
-INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (11, '416', '2024-04-05', 'Maintenance work', false);
-INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (12, '416', '2024-04-06', 'Maintenance work', false);
-INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (13, '435', '2024-04-05', 'Maintenance work', false);
-INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (14, '435', '2024-04-06', 'Maintenance work', false);
-INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (15, '457', '2024-04-05', 'Maintenance work', false);
-INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (16, '457', '2024-04-06', 'Maintenance work', false);
-INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (17, '454', '2024-04-05', 'Maintenance work', false);
-INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (18, '454', '2024-04-06', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (11, '767', '2024-04-04', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (12, '767', '2024-04-05', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (13, '462', '2024-04-04', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (14, '462', '2024-04-05', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (15, '416', '2024-04-05', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (16, '416', '2024-04-06', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (17, '435', '2024-04-05', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (18, '435', '2024-04-06', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (19, '457', '2024-04-05', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (20, '457', '2024-04-06', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (21, '761', '2024-04-05', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (22, '761', '2024-04-06', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (23, '756', '2024-04-05', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (24, '756', '2024-04-06', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (25, '454', '2024-04-05', 'Maintenance work', false);
+INSERT INTO temp_holiday (id, loc_code, holiday, description, public) values (26, '454', '2024-04-06', 'Maintenance work', false);
 
 select
         loc_code,
