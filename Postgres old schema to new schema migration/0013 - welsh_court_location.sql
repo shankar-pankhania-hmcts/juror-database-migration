@@ -30,7 +30,7 @@ truncate table juror_mod.welsh_court_location;
 with target
 as
 (
-	insert into juror_mod.welsh_court_location(loc_code, loc_name, loc_address1, loc_address2, loc_address3, loc_address4, loc_address5, loc_address6, location_address)
+	insert into juror_mod.welsh_court_location(loc_code, loc_name, loc_address1, loc_address2, loc_address3, loc_address4, loc_address5, loc_address6, location_address, last_update)
 	select distinct 
 			wl.loc_code,
 			wl.loc_name,
@@ -40,7 +40,8 @@ as
 			wl.loc_address4,
 			wl.loc_address5,
 			wl.loc_address6,
-			wl.location_address
+			wl.location_address,
+			wl.last_update
 	from juror.welsh_location wl
 	returning 1
 )
