@@ -49,7 +49,11 @@ insert into temp_bankholidays (bank_holiday,description) values ('2025/12/26', '
 update	juror_mod.migration_log
 set		source_count = (select count(1) from juror.holidays),
 		expected_target_count = (select count(1) from temp_bankholidays) + 
-		(select count(1) from (select holiday from juror.holidays except select bank_holiday from temp_bankholidays))
+		(select count(1) from (	select 		holiday 
+								from 		juror.holidays h
+								inner join	juror.court_location cl
+									on		cl."owner" = h."owner"
+								where 		not exists(select 1 from temp_bankholidays tbh where tbh.bank_holiday = h.holiday)))
 where 	script_number = '0006';
 
 
@@ -57,21 +61,23 @@ truncate juror_mod.holiday restart identity cascade;
 
 with target as 
 (
-	insert into juror_mod.holiday(owner,holiday,description,public)	
-	select  null as owner, 
-			tbh.bank_holiday, 
-			tbh.description,
-			true as public
-	from temp_bankholidays tbh
+	insert into juror_mod.holiday(loc_code,holiday,description,public)	
+	select  	null as "owner", 
+				tbh.bank_holiday, 
+				tbh.description,
+				true as public
+	from 		temp_bankholidays tbh
 	union
 	select distinct 
-			h.owner, 
-			h.holiday, 
-			h.description,
-			false
-	from juror.holidays h
-	where not exists(select 1 from temp_bankholidays tbh where tbh.bank_holiday = h.holiday)
-	order by bank_holiday 
+				cl.loc_code, 
+				h.holiday, 
+				h.description,
+				false as public
+	from 		juror.holidays h
+	inner join	juror.court_location cl
+		on		cl."owner" = h."owner"
+	where 		not exists(select 1 from temp_bankholidays tbh where tbh.bank_holiday = h.holiday)
+	order by 	bank_holiday 
 	returning 1
 )
 
